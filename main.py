@@ -10,7 +10,7 @@ import numpy as np
 
 from embedding import *
 from scheduler import *
-from train import *
+from model import *
 from sourcing import *
 from animate import *
 from generate import *
