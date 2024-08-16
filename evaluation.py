@@ -34,8 +34,8 @@ if __name__ == "__main__":
     parser.add_argument("--beta_schedule", type=str, default="linear", choices=["linear", "quadratic"])
 
     config, _ = parser.parse_known_args()
-
-    dataset = get_dataset(config.train_batch_size)
+    
+    dataset = get_dataset(config.dataset)
 
     dataloader = DataLoader(
         dataset, batch_size=config.train_batch_size, shuffle=True, drop_last=True)
