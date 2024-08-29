@@ -1,0 +1,16 @@
+2024-08-29 20:45:42,001 - default_logger - INFO - Starting main process
+2024-08-29 20:45:42,187 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:45:42,187 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:45:42,188 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:45:42,188 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:45:42,188 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:45:42,204 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:45:42,204 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:45:42,204 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting score model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting score model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting score model training
+2024-08-29 20:45:42,211 - default_logger - INFO - Starting score model training

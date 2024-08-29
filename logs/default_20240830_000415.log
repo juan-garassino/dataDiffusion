@@ -1,0 +1,81 @@
+2024-08-30 00:04:15,204 - default_logger - INFO - Starting main process
+2024-08-30 00:04:15,204 - default_logger - INFO - Starting main process
+2024-08-30 00:04:15,403 - default_logger - INFO - Getting dataset: california
+2024-08-30 00:04:15,403 - default_logger - INFO - Getting dataset: california
+2024-08-30 00:04:15,403 - default_logger - INFO - Getting dataset: california
+2024-08-30 00:04:15,404 - default_logger - INFO - Loading California Housing dataset
+2024-08-30 00:04:15,404 - default_logger - INFO - Loading California Housing dataset
+2024-08-30 00:04:15,404 - default_logger - INFO - Loading California Housing dataset
+2024-08-30 00:04:15,404 - default_logger - INFO - Loading California Housing dataset
+2024-08-30 00:04:15,432 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-30 00:04:15,432 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-30 00:04:15,432 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-30 00:04:15,432 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-30 00:04:15,447 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=128, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-1): 2 x Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (2): Tanh()
+    )
+  )
+  (final): Linear(in_features=128, out_features=8, bias=True)
+)
+2024-08-30 00:04:15,447 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=128, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-1): 2 x Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (2): Tanh()
+    )
+  )
+  (final): Linear(in_features=128, out_features=8, bias=True)
+)
+2024-08-30 00:04:15,447 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=128, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-1): 2 x Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (2): Tanh()
+    )
+  )
+  (final): Linear(in_features=128, out_features=8, bias=True)
+)
+2024-08-30 00:04:15,447 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=128, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-1): 2 x Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (2): Tanh()
+    )
+  )
+  (final): Linear(in_features=128, out_features=8, bias=True)
+)

@@ -1,0 +1,27 @@
+2024-08-29 13:14:28,582 - default_logger - INFO - Plotting loss curve
+2024-08-29 13:14:28,583 - default_logger - INFO - Creating plot: Training Loss
+2024-08-29 13:14:28,583 - default_logger - INFO - Creating plot: Training Loss
+2024-08-29 13:14:28,927 - default_logger - INFO - Plot saved to: results/20240829_131428_training_loss.png
+2024-08-29 13:14:28,927 - default_logger - INFO - Plot saved to: results/20240829_131428_training_loss.png
+2024-08-29 13:14:28,928 - default_logger - INFO - Plot creation completed
+2024-08-29 13:14:28,928 - default_logger - INFO - Plot creation completed
+2024-08-29 13:14:28,928 - default_logger - INFO - Loss curve plotting completed
+2024-08-29 13:14:28,928 - default_logger - INFO - Loss curve plotting completed
+2024-08-29 13:14:28,929 - default_logger - INFO - Evaluating model
+2024-08-29 13:14:28,929 - default_logger - INFO - Evaluating model
+2024-08-29 13:14:28,929 - default_logger - INFO - Evaluating model
+2024-08-29 13:14:30,574 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,574 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,574 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,575 - default_logger - INFO - Generated samples shape: torch.Size([100, 8])
+2024-08-29 13:14:30,575 - default_logger - INFO - Generated samples shape: torch.Size([100, 8])
+2024-08-29 13:14:30,575 - default_logger - INFO - Generated samples shape: torch.Size([100, 8])
+2024-08-29 13:14:30,575 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,575 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,575 - default_logger - INFO - Evaluation MSE: 50536.2188
+2024-08-29 13:14:30,577 - default_logger - INFO - Animating diffusion process
+2024-08-29 13:14:30,577 - default_logger - INFO - Animating diffusion process
+2024-08-29 13:14:30,577 - default_logger - INFO - Animating diffusion process
+2024-08-29 13:14:30,578 - default_logger - INFO - Creating animation: Diffusion Process
+2024-08-29 13:14:30,578 - default_logger - INFO - Creating animation: Diffusion Process
+2024-08-29 13:14:30,578 - default_logger - INFO - Creating animation: Diffusion Process

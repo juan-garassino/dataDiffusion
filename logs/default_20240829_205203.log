@@ -1,0 +1,33 @@
+2024-08-29 20:52:04,033 - default_logger - INFO - Starting main process
+2024-08-29 20:52:04,033 - default_logger - INFO - Starting main process
+2024-08-29 20:52:04,033 - default_logger - INFO - Starting main process
+2024-08-29 20:52:04,202 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:52:04,202 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:52:04,202 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:52:04,203 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:52:04,203 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:52:04,203 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:52:04,217 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:52:04,217 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:52:04,217 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:52:04,224 - default_logger - INFO - Starting model training
+2024-08-29 20:52:04,224 - default_logger - INFO - Starting model training
+2024-08-29 20:52:04,224 - default_logger - INFO - Starting model training
+2024-08-29 20:52:04,225 - default_logger - INFO - Starting score model training
+2024-08-29 20:52:04,225 - default_logger - INFO - Starting score model training
+2024-08-29 20:52:04,225 - default_logger - INFO - Starting score model training
+2024-08-29 20:52:09,960 - default_logger - INFO - Epoch 1/3, Average Loss: nan
+2024-08-29 20:52:09,960 - default_logger - INFO - Epoch 1/3, Average Loss: nan
+2024-08-29 20:52:09,960 - default_logger - INFO - Epoch 1/3, Average Loss: nan
+2024-08-29 20:52:15,069 - default_logger - INFO - Epoch 2/3, Average Loss: nan
+2024-08-29 20:52:15,069 - default_logger - INFO - Epoch 2/3, Average Loss: nan
+2024-08-29 20:52:15,069 - default_logger - INFO - Epoch 2/3, Average Loss: nan
+2024-08-29 20:52:23,220 - default_logger - INFO - Epoch 3/3, Average Loss: nan
+2024-08-29 20:52:23,220 - default_logger - INFO - Epoch 3/3, Average Loss: nan
+2024-08-29 20:52:23,220 - default_logger - INFO - Epoch 3/3, Average Loss: nan
+2024-08-29 20:52:23,221 - default_logger - INFO - Model training completed
+2024-08-29 20:52:23,221 - default_logger - INFO - Model training completed
+2024-08-29 20:52:23,221 - default_logger - INFO - Model training completed
+2024-08-29 20:52:23,222 - default_logger - INFO - Generating samples
+2024-08-29 20:52:23,222 - default_logger - INFO - Generating samples
+2024-08-29 20:52:23,222 - default_logger - INFO - Generating samples

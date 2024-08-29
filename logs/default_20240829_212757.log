@@ -1,0 +1,1077 @@
+2024-08-29 21:27:57,699 - default_logger - INFO - Starting main process
+2024-08-29 21:27:57,699 - default_logger - INFO - Starting main process
+2024-08-29 21:27:57,699 - default_logger - INFO - Starting main process
+2024-08-29 21:27:57,867 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:27:57,867 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:27:57,867 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:27:57,867 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:27:57,868 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:27:57,868 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:27:57,868 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:27:57,868 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:27:57,868 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:27:57,882 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:27:57,882 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:27:57,882 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:27:57,882 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:27:57,882 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:27:57,947 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=256, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=256, bias=True)
+  (layers): ModuleList(
+    (0-7): 8 x Sequential(
+      (0): Linear(in_features=256, out_features=1024, bias=True)
+      (1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=1024, out_features=256, bias=True)
+      (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=256, out_features=8, bias=True)
+)
+2024-08-29 21:27:57,947 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=256, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=256, bias=True)
+  (layers): ModuleList(
+    (0-7): 8 x Sequential(
+      (0): Linear(in_features=256, out_features=1024, bias=True)
+      (1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=1024, out_features=256, bias=True)
+      (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=256, out_features=8, bias=True)
+)
+2024-08-29 21:27:57,947 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=256, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=256, bias=True)
+  (layers): ModuleList(
+    (0-7): 8 x Sequential(
+      (0): Linear(in_features=256, out_features=1024, bias=True)
+      (1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=1024, out_features=256, bias=True)
+      (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=256, out_features=8, bias=True)
+)
+2024-08-29 21:27:57,947 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=256, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=256, bias=True)
+  (layers): ModuleList(
+    (0-7): 8 x Sequential(
+      (0): Linear(in_features=256, out_features=1024, bias=True)
+      (1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=1024, out_features=256, bias=True)
+      (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=256, out_features=8, bias=True)
+)
+2024-08-29 21:27:57,947 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=256, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=256, bias=True)
+  (layers): ModuleList(
+    (0-7): 8 x Sequential(
+      (0): Linear(in_features=256, out_features=1024, bias=True)
+      (1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=1024, out_features=256, bias=True)
+      (4): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=256, out_features=8, bias=True)
+)
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:57,954 - default_logger - INFO - Starting score model training
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,231 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,432 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,534 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:27:59,733 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,000 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,099 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,200 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,298 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:00,720 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,001 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,104 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,207 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,301 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,390 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,487 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,581 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,681 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,779 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,881 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:01,975 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,266 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,362 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,463 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,567 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,665 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,760 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,871 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:02,965 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,281 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,629 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,872 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:03,989 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,175 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,279 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,399 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,498 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,588 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,689 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,788 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,880 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:04,986 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,129 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,442 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,542 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,656 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,781 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,896 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:05,993 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,084 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,185 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,280 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,787 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,891 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:06,988 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,085 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,197 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,320 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,444 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,649 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,847 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:07,959 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,063 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,176 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,550 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,664 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,878 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:08,977 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,083 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,196 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,292 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,385 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,493 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,616 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,731 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,830 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:09,923 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,033 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,150 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,251 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,356 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,464 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,585 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,710 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,833 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:10,943 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,042 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,134 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,237 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,363 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,488 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,611 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,732 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:11,980 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,116 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,228 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,325 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,418 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,523 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,657 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:12,776 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,154 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,265 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,379 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,478 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,575 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,676 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,861 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:13,952 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,048 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,157 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,274 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,378 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,476 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,577 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,699 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,797 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:14,894 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,299 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,415 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,547 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,672 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:15,783 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,087 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,194 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,295 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,402 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,522 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,640 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:16,885 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,003 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,125 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,227 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,533 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,636 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,744 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,874 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:17,992 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,343 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,452 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,570 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,669 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,762 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,864 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:18,962 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,068 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,177 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan
+2024-08-29 21:28:19,501 - default_logger - WARNING - Loss is not finite: nan

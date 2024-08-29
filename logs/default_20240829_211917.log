@@ -1,0 +1,17 @@
+2024-08-29 21:19:20,307 - default_logger - INFO - Starting main process
+2024-08-29 21:19:20,475 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:19:20,476 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:19:20,492 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:19:20,511 - default_logger - INFO - Starting score model training
+2024-08-29 21:19:26,673 - default_logger - INFO - Epoch 1/100, Average Loss: nan, LR: 8.53e-06
+2024-08-29 21:19:32,795 - default_logger - INFO - Epoch 2/100, Average Loss: nan, LR: 1.01e-05
+2024-08-29 21:19:39,500 - default_logger - INFO - Epoch 3/100, Average Loss: nan, LR: 1.28e-05
+2024-08-29 21:19:44,584 - default_logger - INFO - Epoch 4/100, Average Loss: nan, LR: 1.64e-05
+2024-08-29 21:19:50,395 - default_logger - INFO - Epoch 5/100, Average Loss: nan, LR: 2.10e-05
+2024-08-29 21:19:57,918 - default_logger - INFO - Epoch 6/100, Average Loss: nan, LR: 2.66e-05
+2024-08-29 21:20:03,486 - default_logger - INFO - Epoch 7/100, Average Loss: nan, LR: 3.30e-05
+2024-08-29 21:20:08,199 - default_logger - INFO - Epoch 8/100, Average Loss: nan, LR: 4.01e-05
+2024-08-29 21:20:13,628 - default_logger - INFO - Epoch 9/100, Average Loss: nan, LR: 4.80e-05
+2024-08-29 21:20:19,445 - default_logger - INFO - Epoch 10/100, Average Loss: nan, LR: 5.66e-05
+2024-08-29 21:20:25,587 - default_logger - INFO - Epoch 11/100, Average Loss: nan, LR: 6.56e-05
+2024-08-29 21:20:31,459 - default_logger - INFO - Epoch 12/100, Average Loss: nan, LR: 7.51e-05

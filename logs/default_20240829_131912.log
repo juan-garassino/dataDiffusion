@@ -1,0 +1,11 @@
+2024-08-29 13:19:12,926 - default_logger - INFO - Animating diffusion process
+2024-08-29 13:19:12,927 - default_logger - INFO - Creating animation: Diffusion Process
+2024-08-29 13:19:12,927 - default_logger - INFO - Creating animation: Diffusion Process
+2024-08-29 13:19:28,460 - default_logger - INFO - Animation saved to: results/20240829_131912_diffusion_process.gif
+2024-08-29 13:19:28,460 - default_logger - INFO - Animation saved to: results/20240829_131912_diffusion_process.gif
+2024-08-29 13:19:28,465 - default_logger - INFO - Animation creation completed
+2024-08-29 13:19:28,465 - default_logger - INFO - Animation creation completed
+2024-08-29 13:19:28,466 - default_logger - INFO - Diffusion process animation completed
+2024-08-29 13:19:28,466 - default_logger - INFO - Diffusion process animation completed
+2024-08-29 13:19:28,467 - default_logger - INFO - Main process completed
+2024-08-29 13:19:28,467 - default_logger - INFO - Main process completed

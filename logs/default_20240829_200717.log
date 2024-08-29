@@ -1,0 +1,7 @@
+2024-08-29 20:07:20,449 - default_logger - INFO - Starting main process
+2024-08-29 20:07:20,651 - default_logger - INFO - Getting dataset: california
+2024-08-29 20:07:20,652 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 20:07:20,681 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 20:07:20,730 - default_logger - INFO - Created TabularTransformer with input size: 8
+2024-08-29 20:07:20,730 - default_logger - INFO - Starting model training
+2024-08-29 20:07:20,731 - default_logger - INFO - Starting model training for 100 epochs

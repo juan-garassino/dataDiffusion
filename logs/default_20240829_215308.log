@@ -1,0 +1,663 @@
+2024-08-29 21:53:11,362 - default_logger - INFO - Starting main process
+2024-08-29 21:53:11,531 - default_logger - INFO - Getting dataset: california
+2024-08-29 21:53:11,532 - default_logger - INFO - Loading California Housing dataset
+2024-08-29 21:53:11,549 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 21:53:11,556 - default_logger - INFO - Model architecture:
+ScoreNetwork(
+  (time_embed): Sequential(
+    (0): Linear(in_features=1, out_features=128, bias=True)
+    (1): SiLU()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (input_proj): Linear(in_features=8, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-3): 4 x Sequential(
+      (0): Linear(in_features=128, out_features=128, bias=True)
+      (1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (2): SiLU()
+      (3): Linear(in_features=128, out_features=128, bias=True)
+      (4): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (5): SiLU()
+    )
+  )
+  (final): Linear(in_features=128, out_features=8, bias=True)
+)
+2024-08-29 21:53:11,560 - default_logger - INFO - Starting score model training
+2024-08-29 21:53:12,895 - default_logger - WARNING - Loss is not finite: nan (occurred 1 times)
+2024-08-29 21:53:12,896 - default_logger - WARNING - Batch index: 1, Epoch: 1
+2024-08-29 21:53:12,915 - default_logger - WARNING - Loss is not finite: nan (occurred 2 times)
+2024-08-29 21:53:12,916 - default_logger - WARNING - Batch index: 2, Epoch: 1
+2024-08-29 21:53:12,930 - default_logger - WARNING - Loss is not finite: nan (occurred 3 times)
+2024-08-29 21:53:12,931 - default_logger - WARNING - Batch index: 3, Epoch: 1
+2024-08-29 21:53:12,947 - default_logger - WARNING - Loss is not finite: nan (occurred 4 times)
+2024-08-29 21:53:12,948 - default_logger - WARNING - Batch index: 4, Epoch: 1
+2024-08-29 21:53:12,976 - default_logger - WARNING - Loss is not finite: nan (occurred 5 times)
+2024-08-29 21:53:12,977 - default_logger - WARNING - Batch index: 6, Epoch: 1
+2024-08-29 21:53:12,990 - default_logger - WARNING - Loss is not finite: nan (occurred 6 times)
+2024-08-29 21:53:12,991 - default_logger - WARNING - Batch index: 7, Epoch: 1
+2024-08-29 21:53:13,002 - default_logger - WARNING - Loss is not finite: nan (occurred 7 times)
+2024-08-29 21:53:13,003 - default_logger - WARNING - Batch index: 8, Epoch: 1
+2024-08-29 21:53:13,010 - default_logger - WARNING - Loss is not finite: nan (occurred 8 times)
+2024-08-29 21:53:13,011 - default_logger - WARNING - Batch index: 9, Epoch: 1
+2024-08-29 21:53:13,017 - default_logger - WARNING - Loss is not finite: nan (occurred 9 times)
+2024-08-29 21:53:13,017 - default_logger - WARNING - Batch index: 10, Epoch: 1
+2024-08-29 21:53:13,024 - default_logger - WARNING - Loss is not finite: nan (occurred 10 times)
+2024-08-29 21:53:13,024 - default_logger - WARNING - Batch index: 11, Epoch: 1
+2024-08-29 21:53:13,030 - default_logger - WARNING - Loss is not finite: nan (occurred 11 times)
+2024-08-29 21:53:13,031 - default_logger - WARNING - Batch index: 12, Epoch: 1
+2024-08-29 21:53:13,041 - default_logger - WARNING - Loss is not finite: nan (occurred 12 times)
+2024-08-29 21:53:13,041 - default_logger - WARNING - Batch index: 13, Epoch: 1
+2024-08-29 21:53:13,049 - default_logger - WARNING - Loss is not finite: nan (occurred 13 times)
+2024-08-29 21:53:13,050 - default_logger - WARNING - Batch index: 14, Epoch: 1
+2024-08-29 21:53:13,059 - default_logger - WARNING - Loss is not finite: nan (occurred 14 times)
+2024-08-29 21:53:13,060 - default_logger - WARNING - Batch index: 15, Epoch: 1
+2024-08-29 21:53:13,068 - default_logger - WARNING - Loss is not finite: nan (occurred 15 times)
+2024-08-29 21:53:13,068 - default_logger - WARNING - Batch index: 16, Epoch: 1
+2024-08-29 21:53:13,075 - default_logger - WARNING - Loss is not finite: nan (occurred 16 times)
+2024-08-29 21:53:13,075 - default_logger - WARNING - Batch index: 17, Epoch: 1
+2024-08-29 21:53:13,081 - default_logger - WARNING - Loss is not finite: nan (occurred 17 times)
+2024-08-29 21:53:13,081 - default_logger - WARNING - Batch index: 18, Epoch: 1
+2024-08-29 21:53:13,089 - default_logger - WARNING - Loss is not finite: nan (occurred 18 times)
+2024-08-29 21:53:13,089 - default_logger - WARNING - Batch index: 19, Epoch: 1
+2024-08-29 21:53:13,115 - default_logger - WARNING - Loss is not finite: nan (occurred 19 times)
+2024-08-29 21:53:13,116 - default_logger - WARNING - Batch index: 21, Epoch: 1
+2024-08-29 21:53:13,124 - default_logger - WARNING - Loss is not finite: nan (occurred 20 times)
+2024-08-29 21:53:13,125 - default_logger - WARNING - Batch index: 22, Epoch: 1
+2024-08-29 21:53:13,132 - default_logger - WARNING - Loss is not finite: nan (occurred 21 times)
+2024-08-29 21:53:13,133 - default_logger - WARNING - Batch index: 23, Epoch: 1
+2024-08-29 21:53:13,144 - default_logger - WARNING - Loss is not finite: nan (occurred 22 times)
+2024-08-29 21:53:13,145 - default_logger - WARNING - Batch index: 24, Epoch: 1
+2024-08-29 21:53:13,151 - default_logger - WARNING - Loss is not finite: nan (occurred 23 times)
+2024-08-29 21:53:13,152 - default_logger - WARNING - Batch index: 25, Epoch: 1
+2024-08-29 21:53:13,158 - default_logger - WARNING - Loss is not finite: nan (occurred 24 times)
+2024-08-29 21:53:13,158 - default_logger - WARNING - Batch index: 26, Epoch: 1
+2024-08-29 21:53:13,169 - default_logger - WARNING - Loss is not finite: nan (occurred 25 times)
+2024-08-29 21:53:13,169 - default_logger - WARNING - Batch index: 27, Epoch: 1
+2024-08-29 21:53:13,178 - default_logger - WARNING - Loss is not finite: nan (occurred 26 times)
+2024-08-29 21:53:13,178 - default_logger - WARNING - Batch index: 28, Epoch: 1
+2024-08-29 21:53:13,185 - default_logger - WARNING - Loss is not finite: nan (occurred 27 times)
+2024-08-29 21:53:13,185 - default_logger - WARNING - Batch index: 29, Epoch: 1
+2024-08-29 21:53:13,195 - default_logger - WARNING - Loss is not finite: nan (occurred 28 times)
+2024-08-29 21:53:13,195 - default_logger - WARNING - Batch index: 30, Epoch: 1
+2024-08-29 21:53:13,203 - default_logger - WARNING - Loss is not finite: nan (occurred 29 times)
+2024-08-29 21:53:13,204 - default_logger - WARNING - Batch index: 31, Epoch: 1
+2024-08-29 21:53:13,229 - default_logger - WARNING - Loss is not finite: nan (occurred 30 times)
+2024-08-29 21:53:13,230 - default_logger - WARNING - Batch index: 33, Epoch: 1
+2024-08-29 21:53:13,240 - default_logger - WARNING - Loss is not finite: nan (occurred 31 times)
+2024-08-29 21:53:13,240 - default_logger - WARNING - Batch index: 34, Epoch: 1
+2024-08-29 21:53:13,247 - default_logger - WARNING - Loss is not finite: nan (occurred 32 times)
+2024-08-29 21:53:13,247 - default_logger - WARNING - Batch index: 35, Epoch: 1
+2024-08-29 21:53:13,263 - default_logger - WARNING - Loss is not finite: nan (occurred 33 times)
+2024-08-29 21:53:13,263 - default_logger - WARNING - Batch index: 36, Epoch: 1
+2024-08-29 21:53:13,293 - default_logger - WARNING - Loss is not finite: nan (occurred 34 times)
+2024-08-29 21:53:13,294 - default_logger - WARNING - Batch index: 38, Epoch: 1
+2024-08-29 21:53:13,305 - default_logger - WARNING - Loss is not finite: nan (occurred 35 times)
+2024-08-29 21:53:13,305 - default_logger - WARNING - Batch index: 39, Epoch: 1
+2024-08-29 21:53:13,315 - default_logger - WARNING - Loss is not finite: nan (occurred 36 times)
+2024-08-29 21:53:13,315 - default_logger - WARNING - Batch index: 40, Epoch: 1
+2024-08-29 21:53:13,323 - default_logger - WARNING - Loss is not finite: nan (occurred 37 times)
+2024-08-29 21:53:13,323 - default_logger - WARNING - Batch index: 41, Epoch: 1
+2024-08-29 21:53:13,332 - default_logger - WARNING - Loss is not finite: nan (occurred 38 times)
+2024-08-29 21:53:13,333 - default_logger - WARNING - Batch index: 42, Epoch: 1
+2024-08-29 21:53:13,392 - default_logger - WARNING - Loss is not finite: nan (occurred 39 times)
+2024-08-29 21:53:13,392 - default_logger - WARNING - Batch index: 45, Epoch: 1
+2024-08-29 21:53:13,443 - default_logger - WARNING - Loss is not finite: nan (occurred 40 times)
+2024-08-29 21:53:13,444 - default_logger - WARNING - Batch index: 48, Epoch: 1
+2024-08-29 21:53:13,458 - default_logger - WARNING - Loss is not finite: nan (occurred 41 times)
+2024-08-29 21:53:13,459 - default_logger - WARNING - Batch index: 49, Epoch: 1
+2024-08-29 21:53:13,470 - default_logger - WARNING - Loss is not finite: nan (occurred 42 times)
+2024-08-29 21:53:13,470 - default_logger - WARNING - Batch index: 50, Epoch: 1
+2024-08-29 21:53:13,481 - default_logger - WARNING - Loss is not finite: nan (occurred 43 times)
+2024-08-29 21:53:13,481 - default_logger - WARNING - Batch index: 51, Epoch: 1
+2024-08-29 21:53:13,492 - default_logger - WARNING - Loss is not finite: nan (occurred 44 times)
+2024-08-29 21:53:13,492 - default_logger - WARNING - Batch index: 52, Epoch: 1
+2024-08-29 21:53:13,500 - default_logger - WARNING - Loss is not finite: nan (occurred 45 times)
+2024-08-29 21:53:13,500 - default_logger - WARNING - Batch index: 53, Epoch: 1
+2024-08-29 21:53:13,511 - default_logger - WARNING - Loss is not finite: nan (occurred 46 times)
+2024-08-29 21:53:13,511 - default_logger - WARNING - Batch index: 54, Epoch: 1
+2024-08-29 21:53:13,522 - default_logger - WARNING - Loss is not finite: nan (occurred 47 times)
+2024-08-29 21:53:13,523 - default_logger - WARNING - Batch index: 55, Epoch: 1
+2024-08-29 21:53:13,532 - default_logger - WARNING - Loss is not finite: nan (occurred 48 times)
+2024-08-29 21:53:13,532 - default_logger - WARNING - Batch index: 56, Epoch: 1
+2024-08-29 21:53:13,558 - default_logger - WARNING - Loss is not finite: nan (occurred 49 times)
+2024-08-29 21:53:13,559 - default_logger - WARNING - Batch index: 58, Epoch: 1
+2024-08-29 21:53:13,574 - default_logger - WARNING - Loss is not finite: nan (occurred 50 times)
+2024-08-29 21:53:13,574 - default_logger - WARNING - Batch index: 59, Epoch: 1
+2024-08-29 21:53:13,586 - default_logger - WARNING - Loss is not finite: nan (occurred 51 times)
+2024-08-29 21:53:13,587 - default_logger - WARNING - Batch index: 60, Epoch: 1
+2024-08-29 21:53:13,597 - default_logger - WARNING - Loss is not finite: nan (occurred 52 times)
+2024-08-29 21:53:13,597 - default_logger - WARNING - Batch index: 61, Epoch: 1
+2024-08-29 21:53:13,608 - default_logger - WARNING - Loss is not finite: nan (occurred 53 times)
+2024-08-29 21:53:13,609 - default_logger - WARNING - Batch index: 62, Epoch: 1
+2024-08-29 21:53:13,617 - default_logger - WARNING - Loss is not finite: nan (occurred 54 times)
+2024-08-29 21:53:13,618 - default_logger - WARNING - Batch index: 63, Epoch: 1
+2024-08-29 21:53:13,626 - default_logger - WARNING - Loss is not finite: nan (occurred 55 times)
+2024-08-29 21:53:13,626 - default_logger - WARNING - Batch index: 64, Epoch: 1
+2024-08-29 21:53:13,633 - default_logger - WARNING - Loss is not finite: nan (occurred 56 times)
+2024-08-29 21:53:13,633 - default_logger - WARNING - Batch index: 65, Epoch: 1
+2024-08-29 21:53:13,641 - default_logger - WARNING - Loss is not finite: nan (occurred 57 times)
+2024-08-29 21:53:13,641 - default_logger - WARNING - Batch index: 66, Epoch: 1
+2024-08-29 21:53:13,651 - default_logger - WARNING - Loss is not finite: nan (occurred 58 times)
+2024-08-29 21:53:13,652 - default_logger - WARNING - Batch index: 67, Epoch: 1
+2024-08-29 21:53:13,663 - default_logger - WARNING - Loss is not finite: nan (occurred 59 times)
+2024-08-29 21:53:13,664 - default_logger - WARNING - Batch index: 68, Epoch: 1
+2024-08-29 21:53:13,671 - default_logger - WARNING - Loss is not finite: nan (occurred 60 times)
+2024-08-29 21:53:13,672 - default_logger - WARNING - Batch index: 69, Epoch: 1
+2024-08-29 21:53:13,682 - default_logger - WARNING - Loss is not finite: nan (occurred 61 times)
+2024-08-29 21:53:13,682 - default_logger - WARNING - Batch index: 70, Epoch: 1
+2024-08-29 21:53:13,692 - default_logger - WARNING - Loss is not finite: nan (occurred 62 times)
+2024-08-29 21:53:13,693 - default_logger - WARNING - Batch index: 71, Epoch: 1
+2024-08-29 21:53:13,700 - default_logger - WARNING - Loss is not finite: nan (occurred 63 times)
+2024-08-29 21:53:13,701 - default_logger - WARNING - Batch index: 72, Epoch: 1
+2024-08-29 21:53:13,712 - default_logger - WARNING - Loss is not finite: nan (occurred 64 times)
+2024-08-29 21:53:13,713 - default_logger - WARNING - Batch index: 73, Epoch: 1
+2024-08-29 21:53:13,723 - default_logger - WARNING - Loss is not finite: nan (occurred 65 times)
+2024-08-29 21:53:13,724 - default_logger - WARNING - Batch index: 74, Epoch: 1
+2024-08-29 21:53:13,732 - default_logger - WARNING - Loss is not finite: nan (occurred 66 times)
+2024-08-29 21:53:13,733 - default_logger - WARNING - Batch index: 75, Epoch: 1
+2024-08-29 21:53:13,789 - default_logger - WARNING - Loss is not finite: nan (occurred 67 times)
+2024-08-29 21:53:13,789 - default_logger - WARNING - Batch index: 79, Epoch: 1
+2024-08-29 21:53:13,807 - default_logger - WARNING - Loss is not finite: nan (occurred 68 times)
+2024-08-29 21:53:13,808 - default_logger - WARNING - Batch index: 80, Epoch: 1
+2024-08-29 21:53:13,816 - default_logger - WARNING - Loss is not finite: nan (occurred 69 times)
+2024-08-29 21:53:13,817 - default_logger - WARNING - Batch index: 81, Epoch: 1
+2024-08-29 21:53:13,825 - default_logger - WARNING - Loss is not finite: nan (occurred 70 times)
+2024-08-29 21:53:13,826 - default_logger - WARNING - Batch index: 82, Epoch: 1
+2024-08-29 21:53:13,833 - default_logger - WARNING - Loss is not finite: nan (occurred 71 times)
+2024-08-29 21:53:13,834 - default_logger - WARNING - Batch index: 83, Epoch: 1
+2024-08-29 21:53:13,841 - default_logger - WARNING - Loss is not finite: nan (occurred 72 times)
+2024-08-29 21:53:13,842 - default_logger - WARNING - Batch index: 84, Epoch: 1
+2024-08-29 21:53:13,853 - default_logger - WARNING - Loss is not finite: nan (occurred 73 times)
+2024-08-29 21:53:13,853 - default_logger - WARNING - Batch index: 85, Epoch: 1
+2024-08-29 21:53:13,863 - default_logger - WARNING - Loss is not finite: nan (occurred 74 times)
+2024-08-29 21:53:13,863 - default_logger - WARNING - Batch index: 86, Epoch: 1
+2024-08-29 21:53:13,870 - default_logger - WARNING - Loss is not finite: nan (occurred 75 times)
+2024-08-29 21:53:13,871 - default_logger - WARNING - Batch index: 87, Epoch: 1
+2024-08-29 21:53:13,882 - default_logger - WARNING - Loss is not finite: nan (occurred 76 times)
+2024-08-29 21:53:13,882 - default_logger - WARNING - Batch index: 88, Epoch: 1
+2024-08-29 21:53:13,894 - default_logger - WARNING - Loss is not finite: nan (occurred 77 times)
+2024-08-29 21:53:13,895 - default_logger - WARNING - Batch index: 89, Epoch: 1
+2024-08-29 21:53:13,919 - default_logger - WARNING - Loss is not finite: nan (occurred 78 times)
+2024-08-29 21:53:13,919 - default_logger - WARNING - Batch index: 91, Epoch: 1
+2024-08-29 21:53:13,929 - default_logger - WARNING - Loss is not finite: nan (occurred 79 times)
+2024-08-29 21:53:13,929 - default_logger - WARNING - Batch index: 92, Epoch: 1
+2024-08-29 21:53:13,941 - default_logger - WARNING - Loss is not finite: nan (occurred 80 times)
+2024-08-29 21:53:13,941 - default_logger - WARNING - Batch index: 93, Epoch: 1
+2024-08-29 21:53:13,951 - default_logger - WARNING - Loss is not finite: nan (occurred 81 times)
+2024-08-29 21:53:13,951 - default_logger - WARNING - Batch index: 94, Epoch: 1
+2024-08-29 21:53:13,958 - default_logger - WARNING - Loss is not finite: nan (occurred 82 times)
+2024-08-29 21:53:13,959 - default_logger - WARNING - Batch index: 95, Epoch: 1
+2024-08-29 21:53:13,970 - default_logger - WARNING - Loss is not finite: nan (occurred 83 times)
+2024-08-29 21:53:13,971 - default_logger - WARNING - Batch index: 96, Epoch: 1
+2024-08-29 21:53:13,980 - default_logger - WARNING - Loss is not finite: nan (occurred 84 times)
+2024-08-29 21:53:13,980 - default_logger - WARNING - Batch index: 97, Epoch: 1
+2024-08-29 21:53:13,987 - default_logger - WARNING - Loss is not finite: nan (occurred 85 times)
+2024-08-29 21:53:13,988 - default_logger - WARNING - Batch index: 98, Epoch: 1
+2024-08-29 21:53:13,998 - default_logger - WARNING - Loss is not finite: nan (occurred 86 times)
+2024-08-29 21:53:13,999 - default_logger - WARNING - Batch index: 99, Epoch: 1
+2024-08-29 21:53:14,010 - default_logger - WARNING - Loss is not finite: nan (occurred 87 times)
+2024-08-29 21:53:14,011 - default_logger - WARNING - Batch index: 100, Epoch: 1
+2024-08-29 21:53:14,019 - default_logger - WARNING - Loss is not finite: nan (occurred 88 times)
+2024-08-29 21:53:14,020 - default_logger - WARNING - Batch index: 101, Epoch: 1
+2024-08-29 21:53:14,026 - default_logger - WARNING - Loss is not finite: nan (occurred 89 times)
+2024-08-29 21:53:14,027 - default_logger - WARNING - Batch index: 102, Epoch: 1
+2024-08-29 21:53:14,034 - default_logger - WARNING - Loss is not finite: nan (occurred 90 times)
+2024-08-29 21:53:14,034 - default_logger - WARNING - Batch index: 103, Epoch: 1
+2024-08-29 21:53:14,062 - default_logger - WARNING - Loss is not finite: nan (occurred 91 times)
+2024-08-29 21:53:14,063 - default_logger - WARNING - Batch index: 105, Epoch: 1
+2024-08-29 21:53:14,072 - default_logger - WARNING - Loss is not finite: nan (occurred 92 times)
+2024-08-29 21:53:14,073 - default_logger - WARNING - Batch index: 106, Epoch: 1
+2024-08-29 21:53:14,085 - default_logger - WARNING - Loss is not finite: nan (occurred 93 times)
+2024-08-29 21:53:14,085 - default_logger - WARNING - Batch index: 107, Epoch: 1
+2024-08-29 21:53:14,099 - default_logger - WARNING - Loss is not finite: nan (occurred 94 times)
+2024-08-29 21:53:14,100 - default_logger - WARNING - Batch index: 108, Epoch: 1
+2024-08-29 21:53:14,108 - default_logger - WARNING - Loss is not finite: nan (occurred 95 times)
+2024-08-29 21:53:14,109 - default_logger - WARNING - Batch index: 109, Epoch: 1
+2024-08-29 21:53:14,116 - default_logger - WARNING - Loss is not finite: nan (occurred 96 times)
+2024-08-29 21:53:14,117 - default_logger - WARNING - Batch index: 110, Epoch: 1
+2024-08-29 21:53:14,123 - default_logger - WARNING - Loss is not finite: nan (occurred 97 times)
+2024-08-29 21:53:14,124 - default_logger - WARNING - Batch index: 111, Epoch: 1
+2024-08-29 21:53:14,133 - default_logger - WARNING - Loss is not finite: nan (occurred 98 times)
+2024-08-29 21:53:14,134 - default_logger - WARNING - Batch index: 112, Epoch: 1
+2024-08-29 21:53:14,142 - default_logger - WARNING - Loss is not finite: nan (occurred 99 times)
+2024-08-29 21:53:14,142 - default_logger - WARNING - Batch index: 113, Epoch: 1
+2024-08-29 21:53:14,150 - default_logger - WARNING - Loss is not finite: nan (occurred 100 times)
+2024-08-29 21:53:14,150 - default_logger - WARNING - Batch index: 114, Epoch: 1
+2024-08-29 21:53:14,156 - default_logger - WARNING - Loss is not finite: nan (occurred 101 times)
+2024-08-29 21:53:14,157 - default_logger - WARNING - Batch index: 115, Epoch: 1
+2024-08-29 21:53:14,166 - default_logger - WARNING - Loss is not finite: nan (occurred 102 times)
+2024-08-29 21:53:14,167 - default_logger - WARNING - Batch index: 116, Epoch: 1
+2024-08-29 21:53:14,175 - default_logger - WARNING - Loss is not finite: nan (occurred 103 times)
+2024-08-29 21:53:14,176 - default_logger - WARNING - Batch index: 117, Epoch: 1
+2024-08-29 21:53:14,201 - default_logger - WARNING - Loss is not finite: nan (occurred 104 times)
+2024-08-29 21:53:14,201 - default_logger - WARNING - Batch index: 119, Epoch: 1
+2024-08-29 21:53:14,212 - default_logger - WARNING - Loss is not finite: nan (occurred 105 times)
+2024-08-29 21:53:14,213 - default_logger - WARNING - Batch index: 120, Epoch: 1
+2024-08-29 21:53:14,220 - default_logger - WARNING - Loss is not finite: nan (occurred 106 times)
+2024-08-29 21:53:14,220 - default_logger - WARNING - Batch index: 121, Epoch: 1
+2024-08-29 21:53:14,226 - default_logger - WARNING - Loss is not finite: nan (occurred 107 times)
+2024-08-29 21:53:14,226 - default_logger - WARNING - Batch index: 122, Epoch: 1
+2024-08-29 21:53:14,236 - default_logger - WARNING - Loss is not finite: nan (occurred 108 times)
+2024-08-29 21:53:14,237 - default_logger - WARNING - Batch index: 123, Epoch: 1
+2024-08-29 21:53:14,245 - default_logger - WARNING - Loss is not finite: nan (occurred 109 times)
+2024-08-29 21:53:14,246 - default_logger - WARNING - Batch index: 124, Epoch: 1
+2024-08-29 21:53:14,253 - default_logger - WARNING - Loss is not finite: nan (occurred 110 times)
+2024-08-29 21:53:14,253 - default_logger - WARNING - Batch index: 125, Epoch: 1
+2024-08-29 21:53:14,260 - default_logger - WARNING - Loss is not finite: nan (occurred 111 times)
+2024-08-29 21:53:14,260 - default_logger - WARNING - Batch index: 126, Epoch: 1
+2024-08-29 21:53:14,270 - default_logger - WARNING - Loss is not finite: nan (occurred 112 times)
+2024-08-29 21:53:14,270 - default_logger - WARNING - Batch index: 127, Epoch: 1
+2024-08-29 21:53:14,279 - default_logger - WARNING - Loss is not finite: nan (occurred 113 times)
+2024-08-29 21:53:14,279 - default_logger - WARNING - Batch index: 128, Epoch: 1
+2024-08-29 21:53:14,286 - default_logger - WARNING - Loss is not finite: nan (occurred 114 times)
+2024-08-29 21:53:14,286 - default_logger - WARNING - Batch index: 129, Epoch: 1
+2024-08-29 21:53:14,292 - default_logger - WARNING - Loss is not finite: nan (occurred 115 times)
+2024-08-29 21:53:14,293 - default_logger - WARNING - Batch index: 130, Epoch: 1
+2024-08-29 21:53:14,341 - default_logger - WARNING - Loss is not finite: nan (occurred 116 times)
+2024-08-29 21:53:14,341 - default_logger - WARNING - Batch index: 133, Epoch: 1
+2024-08-29 21:53:14,350 - default_logger - WARNING - Loss is not finite: nan (occurred 117 times)
+2024-08-29 21:53:14,351 - default_logger - WARNING - Batch index: 134, Epoch: 1
+2024-08-29 21:53:14,357 - default_logger - WARNING - Loss is not finite: nan (occurred 118 times)
+2024-08-29 21:53:14,358 - default_logger - WARNING - Batch index: 135, Epoch: 1
+2024-08-29 21:53:14,370 - default_logger - WARNING - Loss is not finite: nan (occurred 119 times)
+2024-08-29 21:53:14,371 - default_logger - WARNING - Batch index: 136, Epoch: 1
+2024-08-29 21:53:14,410 - default_logger - WARNING - Loss is not finite: nan (occurred 120 times)
+2024-08-29 21:53:14,410 - default_logger - WARNING - Batch index: 139, Epoch: 1
+2024-08-29 21:53:14,420 - default_logger - WARNING - Loss is not finite: nan (occurred 121 times)
+2024-08-29 21:53:14,420 - default_logger - WARNING - Batch index: 140, Epoch: 1
+2024-08-29 21:53:14,426 - default_logger - WARNING - Loss is not finite: nan (occurred 122 times)
+2024-08-29 21:53:14,426 - default_logger - WARNING - Batch index: 141, Epoch: 1
+2024-08-29 21:53:14,436 - default_logger - WARNING - Loss is not finite: nan (occurred 123 times)
+2024-08-29 21:53:14,437 - default_logger - WARNING - Batch index: 142, Epoch: 1
+2024-08-29 21:53:14,445 - default_logger - WARNING - Loss is not finite: nan (occurred 124 times)
+2024-08-29 21:53:14,446 - default_logger - WARNING - Batch index: 143, Epoch: 1
+2024-08-29 21:53:14,469 - default_logger - WARNING - Loss is not finite: nan (occurred 125 times)
+2024-08-29 21:53:14,469 - default_logger - WARNING - Batch index: 145, Epoch: 1
+2024-08-29 21:53:14,480 - default_logger - WARNING - Loss is not finite: nan (occurred 126 times)
+2024-08-29 21:53:14,480 - default_logger - WARNING - Batch index: 146, Epoch: 1
+2024-08-29 21:53:14,488 - default_logger - WARNING - Loss is not finite: nan (occurred 127 times)
+2024-08-29 21:53:14,488 - default_logger - WARNING - Batch index: 147, Epoch: 1
+2024-08-29 21:53:14,498 - default_logger - WARNING - Loss is not finite: nan (occurred 128 times)
+2024-08-29 21:53:14,499 - default_logger - WARNING - Batch index: 148, Epoch: 1
+2024-08-29 21:53:14,508 - default_logger - WARNING - Loss is not finite: nan (occurred 129 times)
+2024-08-29 21:53:14,508 - default_logger - WARNING - Batch index: 149, Epoch: 1
+2024-08-29 21:53:14,532 - default_logger - WARNING - Loss is not finite: nan (occurred 130 times)
+2024-08-29 21:53:14,532 - default_logger - WARNING - Batch index: 151, Epoch: 1
+2024-08-29 21:53:14,544 - default_logger - WARNING - Loss is not finite: nan (occurred 131 times)
+2024-08-29 21:53:14,544 - default_logger - WARNING - Batch index: 152, Epoch: 1
+2024-08-29 21:53:14,584 - default_logger - WARNING - Loss is not finite: nan (occurred 132 times)
+2024-08-29 21:53:14,585 - default_logger - WARNING - Batch index: 155, Epoch: 1
+2024-08-29 21:53:14,594 - default_logger - WARNING - Loss is not finite: nan (occurred 133 times)
+2024-08-29 21:53:14,594 - default_logger - WARNING - Batch index: 156, Epoch: 1
+2024-08-29 21:53:14,605 - default_logger - WARNING - Loss is not finite: nan (occurred 134 times)
+2024-08-29 21:53:14,606 - default_logger - WARNING - Batch index: 157, Epoch: 1
+2024-08-29 21:53:14,614 - default_logger - WARNING - Loss is not finite: nan (occurred 135 times)
+2024-08-29 21:53:14,614 - default_logger - WARNING - Batch index: 158, Epoch: 1
+2024-08-29 21:53:14,657 - default_logger - WARNING - Loss is not finite: nan (occurred 136 times)
+2024-08-29 21:53:14,657 - default_logger - WARNING - Batch index: 161, Epoch: 1
+2024-08-29 21:53:14,671 - default_logger - WARNING - Loss is not finite: nan (occurred 137 times)
+2024-08-29 21:53:14,672 - default_logger - WARNING - Batch index: 162, Epoch: 1
+2024-08-29 21:53:14,702 - default_logger - WARNING - Loss is not finite: nan (occurred 138 times)
+2024-08-29 21:53:14,702 - default_logger - WARNING - Batch index: 164, Epoch: 1
+2024-08-29 21:53:14,742 - default_logger - WARNING - Loss is not finite: nan (occurred 139 times)
+2024-08-29 21:53:14,743 - default_logger - WARNING - Batch index: 167, Epoch: 1
+2024-08-29 21:53:14,753 - default_logger - WARNING - Loss is not finite: nan (occurred 140 times)
+2024-08-29 21:53:14,753 - default_logger - WARNING - Batch index: 168, Epoch: 1
+2024-08-29 21:53:14,759 - default_logger - WARNING - Loss is not finite: nan (occurred 141 times)
+2024-08-29 21:53:14,759 - default_logger - WARNING - Batch index: 169, Epoch: 1
+2024-08-29 21:53:14,769 - default_logger - WARNING - Loss is not finite: nan (occurred 142 times)
+2024-08-29 21:53:14,770 - default_logger - WARNING - Batch index: 170, Epoch: 1
+2024-08-29 21:53:14,778 - default_logger - WARNING - Loss is not finite: nan (occurred 143 times)
+2024-08-29 21:53:14,778 - default_logger - WARNING - Batch index: 171, Epoch: 1
+2024-08-29 21:53:14,786 - default_logger - WARNING - Loss is not finite: nan (occurred 144 times)
+2024-08-29 21:53:14,787 - default_logger - WARNING - Batch index: 172, Epoch: 1
+2024-08-29 21:53:14,793 - default_logger - WARNING - Loss is not finite: nan (occurred 145 times)
+2024-08-29 21:53:14,793 - default_logger - WARNING - Batch index: 173, Epoch: 1
+2024-08-29 21:53:14,819 - default_logger - WARNING - Loss is not finite: nan (occurred 146 times)
+2024-08-29 21:53:14,819 - default_logger - WARNING - Batch index: 174, Epoch: 1
+2024-08-29 21:53:14,889 - default_logger - WARNING - Loss is not finite: nan (occurred 147 times)
+2024-08-29 21:53:14,892 - default_logger - WARNING - Batch index: 175, Epoch: 1
+2024-08-29 21:53:14,902 - default_logger - WARNING - Loss is not finite: nan (occurred 148 times)
+2024-08-29 21:53:14,902 - default_logger - WARNING - Batch index: 176, Epoch: 1
+2024-08-29 21:53:14,909 - default_logger - WARNING - Loss is not finite: nan (occurred 149 times)
+2024-08-29 21:53:14,909 - default_logger - WARNING - Batch index: 177, Epoch: 1
+2024-08-29 21:53:14,921 - default_logger - WARNING - Loss is not finite: nan (occurred 150 times)
+2024-08-29 21:53:14,921 - default_logger - WARNING - Batch index: 178, Epoch: 1
+2024-08-29 21:53:14,929 - default_logger - WARNING - Loss is not finite: nan (occurred 151 times)
+2024-08-29 21:53:14,929 - default_logger - WARNING - Batch index: 179, Epoch: 1
+2024-08-29 21:53:14,937 - default_logger - WARNING - Loss is not finite: nan (occurred 152 times)
+2024-08-29 21:53:14,937 - default_logger - WARNING - Batch index: 180, Epoch: 1
+2024-08-29 21:53:14,946 - default_logger - WARNING - Loss is not finite: nan (occurred 153 times)
+2024-08-29 21:53:14,946 - default_logger - WARNING - Batch index: 181, Epoch: 1
+2024-08-29 21:53:14,955 - default_logger - WARNING - Loss is not finite: nan (occurred 154 times)
+2024-08-29 21:53:14,956 - default_logger - WARNING - Batch index: 182, Epoch: 1
+2024-08-29 21:53:14,964 - default_logger - WARNING - Loss is not finite: nan (occurred 155 times)
+2024-08-29 21:53:14,964 - default_logger - WARNING - Batch index: 183, Epoch: 1
+2024-08-29 21:53:14,971 - default_logger - WARNING - Loss is not finite: nan (occurred 156 times)
+2024-08-29 21:53:14,972 - default_logger - WARNING - Batch index: 184, Epoch: 1
+2024-08-29 21:53:14,979 - default_logger - WARNING - Loss is not finite: nan (occurred 157 times)
+2024-08-29 21:53:14,979 - default_logger - WARNING - Batch index: 185, Epoch: 1
+2024-08-29 21:53:15,034 - default_logger - WARNING - Loss is not finite: nan (occurred 158 times)
+2024-08-29 21:53:15,034 - default_logger - WARNING - Batch index: 188, Epoch: 1
+2024-08-29 21:53:15,062 - default_logger - WARNING - Loss is not finite: nan (occurred 159 times)
+2024-08-29 21:53:15,063 - default_logger - WARNING - Batch index: 190, Epoch: 1
+2024-08-29 21:53:15,095 - default_logger - WARNING - Loss is not finite: nan (occurred 160 times)
+2024-08-29 21:53:15,096 - default_logger - WARNING - Batch index: 192, Epoch: 1
+2024-08-29 21:53:15,105 - default_logger - WARNING - Loss is not finite: nan (occurred 161 times)
+2024-08-29 21:53:15,105 - default_logger - WARNING - Batch index: 193, Epoch: 1
+2024-08-29 21:53:15,112 - default_logger - WARNING - Loss is not finite: nan (occurred 162 times)
+2024-08-29 21:53:15,113 - default_logger - WARNING - Batch index: 194, Epoch: 1
+2024-08-29 21:53:15,122 - default_logger - WARNING - Loss is not finite: nan (occurred 163 times)
+2024-08-29 21:53:15,123 - default_logger - WARNING - Batch index: 195, Epoch: 1
+2024-08-29 21:53:15,131 - default_logger - WARNING - Loss is not finite: nan (occurred 164 times)
+2024-08-29 21:53:15,131 - default_logger - WARNING - Batch index: 196, Epoch: 1
+2024-08-29 21:53:15,138 - default_logger - WARNING - Loss is not finite: nan (occurred 165 times)
+2024-08-29 21:53:15,138 - default_logger - WARNING - Batch index: 197, Epoch: 1
+2024-08-29 21:53:15,165 - default_logger - WARNING - Loss is not finite: nan (occurred 166 times)
+2024-08-29 21:53:15,165 - default_logger - WARNING - Batch index: 199, Epoch: 1
+2024-08-29 21:53:15,174 - default_logger - WARNING - Loss is not finite: nan (occurred 167 times)
+2024-08-29 21:53:15,175 - default_logger - WARNING - Batch index: 200, Epoch: 1
+2024-08-29 21:53:15,185 - default_logger - WARNING - Loss is not finite: nan (occurred 168 times)
+2024-08-29 21:53:15,185 - default_logger - WARNING - Batch index: 201, Epoch: 1
+2024-08-29 21:53:15,194 - default_logger - WARNING - Loss is not finite: nan (occurred 169 times)
+2024-08-29 21:53:15,194 - default_logger - WARNING - Batch index: 202, Epoch: 1
+2024-08-29 21:53:15,201 - default_logger - WARNING - Loss is not finite: nan (occurred 170 times)
+2024-08-29 21:53:15,201 - default_logger - WARNING - Batch index: 203, Epoch: 1
+2024-08-29 21:53:15,209 - default_logger - WARNING - Loss is not finite: nan (occurred 171 times)
+2024-08-29 21:53:15,209 - default_logger - WARNING - Batch index: 204, Epoch: 1
+2024-08-29 21:53:15,220 - default_logger - WARNING - Loss is not finite: nan (occurred 172 times)
+2024-08-29 21:53:15,220 - default_logger - WARNING - Batch index: 205, Epoch: 1
+2024-08-29 21:53:15,230 - default_logger - WARNING - Loss is not finite: nan (occurred 173 times)
+2024-08-29 21:53:15,230 - default_logger - WARNING - Batch index: 206, Epoch: 1
+2024-08-29 21:53:15,261 - default_logger - WARNING - Loss is not finite: nan (occurred 174 times)
+2024-08-29 21:53:15,262 - default_logger - WARNING - Batch index: 208, Epoch: 1
+2024-08-29 21:53:15,271 - default_logger - WARNING - Loss is not finite: nan (occurred 175 times)
+2024-08-29 21:53:15,272 - default_logger - WARNING - Batch index: 209, Epoch: 1
+2024-08-29 21:53:15,278 - default_logger - WARNING - Loss is not finite: nan (occurred 176 times)
+2024-08-29 21:53:15,279 - default_logger - WARNING - Batch index: 210, Epoch: 1
+2024-08-29 21:53:15,309 - default_logger - WARNING - Loss is not finite: nan (occurred 177 times)
+2024-08-29 21:53:15,309 - default_logger - WARNING - Batch index: 212, Epoch: 1
+2024-08-29 21:53:15,322 - default_logger - WARNING - Loss is not finite: nan (occurred 178 times)
+2024-08-29 21:53:15,323 - default_logger - WARNING - Batch index: 213, Epoch: 1
+2024-08-29 21:53:15,330 - default_logger - WARNING - Loss is not finite: nan (occurred 179 times)
+2024-08-29 21:53:15,331 - default_logger - WARNING - Batch index: 214, Epoch: 1
+2024-08-29 21:53:15,338 - default_logger - WARNING - Loss is not finite: nan (occurred 180 times)
+2024-08-29 21:53:15,338 - default_logger - WARNING - Batch index: 215, Epoch: 1
+2024-08-29 21:53:15,346 - default_logger - WARNING - Loss is not finite: nan (occurred 181 times)
+2024-08-29 21:53:15,346 - default_logger - WARNING - Batch index: 216, Epoch: 1
+2024-08-29 21:53:15,355 - default_logger - WARNING - Loss is not finite: nan (occurred 182 times)
+2024-08-29 21:53:15,355 - default_logger - WARNING - Batch index: 217, Epoch: 1
+2024-08-29 21:53:15,377 - default_logger - WARNING - Loss is not finite: nan (occurred 183 times)
+2024-08-29 21:53:15,377 - default_logger - WARNING - Batch index: 219, Epoch: 1
+2024-08-29 21:53:15,391 - default_logger - WARNING - Loss is not finite: nan (occurred 184 times)
+2024-08-29 21:53:15,392 - default_logger - WARNING - Batch index: 220, Epoch: 1
+2024-08-29 21:53:15,399 - default_logger - WARNING - Loss is not finite: nan (occurred 185 times)
+2024-08-29 21:53:15,399 - default_logger - WARNING - Batch index: 221, Epoch: 1
+2024-08-29 21:53:15,406 - default_logger - WARNING - Loss is not finite: nan (occurred 186 times)
+2024-08-29 21:53:15,406 - default_logger - WARNING - Batch index: 222, Epoch: 1
+2024-08-29 21:53:15,416 - default_logger - WARNING - Loss is not finite: nan (occurred 187 times)
+2024-08-29 21:53:15,417 - default_logger - WARNING - Batch index: 223, Epoch: 1
+2024-08-29 21:53:15,459 - default_logger - WARNING - Loss is not finite: nan (occurred 188 times)
+2024-08-29 21:53:15,459 - default_logger - WARNING - Batch index: 226, Epoch: 1
+2024-08-29 21:53:15,468 - default_logger - WARNING - Loss is not finite: nan (occurred 189 times)
+2024-08-29 21:53:15,469 - default_logger - WARNING - Batch index: 227, Epoch: 1
+2024-08-29 21:53:15,477 - default_logger - WARNING - Loss is not finite: nan (occurred 190 times)
+2024-08-29 21:53:15,477 - default_logger - WARNING - Batch index: 228, Epoch: 1
+2024-08-29 21:53:15,503 - default_logger - WARNING - Loss is not finite: nan (occurred 191 times)
+2024-08-29 21:53:15,503 - default_logger - WARNING - Batch index: 230, Epoch: 1
+2024-08-29 21:53:15,512 - default_logger - WARNING - Loss is not finite: nan (occurred 192 times)
+2024-08-29 21:53:15,513 - default_logger - WARNING - Batch index: 231, Epoch: 1
+2024-08-29 21:53:15,525 - default_logger - WARNING - Loss is not finite: nan (occurred 193 times)
+2024-08-29 21:53:15,525 - default_logger - WARNING - Batch index: 232, Epoch: 1
+2024-08-29 21:53:15,532 - default_logger - WARNING - Loss is not finite: nan (occurred 194 times)
+2024-08-29 21:53:15,533 - default_logger - WARNING - Batch index: 233, Epoch: 1
+2024-08-29 21:53:15,540 - default_logger - WARNING - Loss is not finite: nan (occurred 195 times)
+2024-08-29 21:53:15,540 - default_logger - WARNING - Batch index: 234, Epoch: 1
+2024-08-29 21:53:15,550 - default_logger - WARNING - Loss is not finite: nan (occurred 196 times)
+2024-08-29 21:53:15,551 - default_logger - WARNING - Batch index: 235, Epoch: 1
+2024-08-29 21:53:15,559 - default_logger - WARNING - Loss is not finite: nan (occurred 197 times)
+2024-08-29 21:53:15,559 - default_logger - WARNING - Batch index: 236, Epoch: 1
+2024-08-29 21:53:15,567 - default_logger - WARNING - Loss is not finite: nan (occurred 198 times)
+2024-08-29 21:53:15,567 - default_logger - WARNING - Batch index: 237, Epoch: 1
+2024-08-29 21:53:15,574 - default_logger - WARNING - Loss is not finite: nan (occurred 199 times)
+2024-08-29 21:53:15,574 - default_logger - WARNING - Batch index: 238, Epoch: 1
+2024-08-29 21:53:15,584 - default_logger - WARNING - Loss is not finite: nan (occurred 200 times)
+2024-08-29 21:53:15,585 - default_logger - WARNING - Batch index: 239, Epoch: 1
+2024-08-29 21:53:15,594 - default_logger - WARNING - Loss is not finite: nan (occurred 201 times)
+2024-08-29 21:53:15,594 - default_logger - WARNING - Batch index: 240, Epoch: 1
+2024-08-29 21:53:15,601 - default_logger - WARNING - Loss is not finite: nan (occurred 202 times)
+2024-08-29 21:53:15,601 - default_logger - WARNING - Batch index: 241, Epoch: 1
+2024-08-29 21:53:15,608 - default_logger - WARNING - Loss is not finite: nan (occurred 203 times)
+2024-08-29 21:53:15,608 - default_logger - WARNING - Batch index: 242, Epoch: 1
+2024-08-29 21:53:15,619 - default_logger - WARNING - Loss is not finite: nan (occurred 204 times)
+2024-08-29 21:53:15,619 - default_logger - WARNING - Batch index: 243, Epoch: 1
+2024-08-29 21:53:15,627 - default_logger - WARNING - Loss is not finite: nan (occurred 205 times)
+2024-08-29 21:53:15,628 - default_logger - WARNING - Batch index: 244, Epoch: 1
+2024-08-29 21:53:15,635 - default_logger - WARNING - Loss is not finite: nan (occurred 206 times)
+2024-08-29 21:53:15,635 - default_logger - WARNING - Batch index: 245, Epoch: 1
+2024-08-29 21:53:15,641 - default_logger - WARNING - Loss is not finite: nan (occurred 207 times)
+2024-08-29 21:53:15,642 - default_logger - WARNING - Batch index: 246, Epoch: 1
+2024-08-29 21:53:15,652 - default_logger - WARNING - Loss is not finite: nan (occurred 208 times)
+2024-08-29 21:53:15,652 - default_logger - WARNING - Batch index: 247, Epoch: 1
+2024-08-29 21:53:15,692 - default_logger - WARNING - Loss is not finite: nan (occurred 209 times)
+2024-08-29 21:53:15,693 - default_logger - WARNING - Batch index: 250, Epoch: 1
+2024-08-29 21:53:15,702 - default_logger - WARNING - Loss is not finite: nan (occurred 210 times)
+2024-08-29 21:53:15,703 - default_logger - WARNING - Batch index: 251, Epoch: 1
+2024-08-29 21:53:15,712 - default_logger - WARNING - Loss is not finite: nan (occurred 211 times)
+2024-08-29 21:53:15,713 - default_logger - WARNING - Batch index: 252, Epoch: 1
+2024-08-29 21:53:15,738 - default_logger - WARNING - Loss is not finite: nan (occurred 212 times)
+2024-08-29 21:53:15,739 - default_logger - WARNING - Batch index: 254, Epoch: 1
+2024-08-29 21:53:15,751 - default_logger - WARNING - Loss is not finite: nan (occurred 213 times)
+2024-08-29 21:53:15,751 - default_logger - WARNING - Batch index: 255, Epoch: 1
+2024-08-29 21:53:15,762 - default_logger - WARNING - Loss is not finite: nan (occurred 214 times)
+2024-08-29 21:53:15,762 - default_logger - WARNING - Batch index: 256, Epoch: 1
+2024-08-29 21:53:15,769 - default_logger - WARNING - Loss is not finite: nan (occurred 215 times)
+2024-08-29 21:53:15,770 - default_logger - WARNING - Batch index: 257, Epoch: 1
+2024-08-29 21:53:15,776 - default_logger - WARNING - Loss is not finite: nan (occurred 216 times)
+2024-08-29 21:53:15,776 - default_logger - WARNING - Batch index: 258, Epoch: 1
+2024-08-29 21:53:15,786 - default_logger - WARNING - Loss is not finite: nan (occurred 217 times)
+2024-08-29 21:53:15,787 - default_logger - WARNING - Batch index: 259, Epoch: 1
+2024-08-29 21:53:15,795 - default_logger - WARNING - Loss is not finite: nan (occurred 218 times)
+2024-08-29 21:53:15,796 - default_logger - WARNING - Batch index: 260, Epoch: 1
+2024-08-29 21:53:15,820 - default_logger - WARNING - Loss is not finite: nan (occurred 219 times)
+2024-08-29 21:53:15,820 - default_logger - WARNING - Batch index: 262, Epoch: 1
+2024-08-29 21:53:15,854 - default_logger - WARNING - Loss is not finite: nan (occurred 220 times)
+2024-08-29 21:53:15,854 - default_logger - WARNING - Batch index: 264, Epoch: 1
+2024-08-29 21:53:15,865 - default_logger - WARNING - Loss is not finite: nan (occurred 221 times)
+2024-08-29 21:53:15,865 - default_logger - WARNING - Batch index: 265, Epoch: 1
+2024-08-29 21:53:15,872 - default_logger - WARNING - Loss is not finite: nan (occurred 222 times)
+2024-08-29 21:53:15,873 - default_logger - WARNING - Batch index: 266, Epoch: 1
+2024-08-29 21:53:15,881 - default_logger - WARNING - Loss is not finite: nan (occurred 223 times)
+2024-08-29 21:53:15,882 - default_logger - WARNING - Batch index: 267, Epoch: 1
+2024-08-29 21:53:15,891 - default_logger - WARNING - Loss is not finite: nan (occurred 224 times)
+2024-08-29 21:53:15,891 - default_logger - WARNING - Batch index: 268, Epoch: 1
+2024-08-29 21:53:15,898 - default_logger - WARNING - Loss is not finite: nan (occurred 225 times)
+2024-08-29 21:53:15,899 - default_logger - WARNING - Batch index: 269, Epoch: 1
+2024-08-29 21:53:15,905 - default_logger - WARNING - Loss is not finite: nan (occurred 226 times)
+2024-08-29 21:53:15,906 - default_logger - WARNING - Batch index: 270, Epoch: 1
+2024-08-29 21:53:15,914 - default_logger - WARNING - Loss is not finite: nan (occurred 227 times)
+2024-08-29 21:53:15,915 - default_logger - WARNING - Batch index: 271, Epoch: 1
+2024-08-29 21:53:15,925 - default_logger - WARNING - Loss is not finite: nan (occurred 228 times)
+2024-08-29 21:53:15,925 - default_logger - WARNING - Batch index: 272, Epoch: 1
+2024-08-29 21:53:15,934 - default_logger - WARNING - Loss is not finite: nan (occurred 229 times)
+2024-08-29 21:53:15,934 - default_logger - WARNING - Batch index: 273, Epoch: 1
+2024-08-29 21:53:15,941 - default_logger - WARNING - Loss is not finite: nan (occurred 230 times)
+2024-08-29 21:53:15,942 - default_logger - WARNING - Batch index: 274, Epoch: 1
+2024-08-29 21:53:15,953 - default_logger - WARNING - Loss is not finite: nan (occurred 231 times)
+2024-08-29 21:53:15,953 - default_logger - WARNING - Batch index: 275, Epoch: 1
+2024-08-29 21:53:15,961 - default_logger - WARNING - Loss is not finite: nan (occurred 232 times)
+2024-08-29 21:53:15,962 - default_logger - WARNING - Batch index: 276, Epoch: 1
+2024-08-29 21:53:15,969 - default_logger - WARNING - Loss is not finite: nan (occurred 233 times)
+2024-08-29 21:53:15,969 - default_logger - WARNING - Batch index: 277, Epoch: 1
+2024-08-29 21:53:15,975 - default_logger - WARNING - Loss is not finite: nan (occurred 234 times)
+2024-08-29 21:53:15,975 - default_logger - WARNING - Batch index: 278, Epoch: 1
+2024-08-29 21:53:16,006 - default_logger - WARNING - Loss is not finite: nan (occurred 235 times)
+2024-08-29 21:53:16,007 - default_logger - WARNING - Batch index: 280, Epoch: 1
+2024-08-29 21:53:16,019 - default_logger - WARNING - Loss is not finite: nan (occurred 236 times)
+2024-08-29 21:53:16,020 - default_logger - WARNING - Batch index: 281, Epoch: 1
+2024-08-29 21:53:16,028 - default_logger - WARNING - Loss is not finite: nan (occurred 237 times)
+2024-08-29 21:53:16,029 - default_logger - WARNING - Batch index: 282, Epoch: 1
+2024-08-29 21:53:16,036 - default_logger - WARNING - Loss is not finite: nan (occurred 238 times)
+2024-08-29 21:53:16,036 - default_logger - WARNING - Batch index: 283, Epoch: 1
+2024-08-29 21:53:16,042 - default_logger - WARNING - Loss is not finite: nan (occurred 239 times)
+2024-08-29 21:53:16,043 - default_logger - WARNING - Batch index: 284, Epoch: 1
+2024-08-29 21:53:16,053 - default_logger - WARNING - Loss is not finite: nan (occurred 240 times)
+2024-08-29 21:53:16,054 - default_logger - WARNING - Batch index: 285, Epoch: 1
+2024-08-29 21:53:16,063 - default_logger - WARNING - Loss is not finite: nan (occurred 241 times)
+2024-08-29 21:53:16,063 - default_logger - WARNING - Batch index: 286, Epoch: 1
+2024-08-29 21:53:16,070 - default_logger - WARNING - Loss is not finite: nan (occurred 242 times)
+2024-08-29 21:53:16,070 - default_logger - WARNING - Batch index: 287, Epoch: 1
+2024-08-29 21:53:16,076 - default_logger - WARNING - Loss is not finite: nan (occurred 243 times)
+2024-08-29 21:53:16,077 - default_logger - WARNING - Batch index: 288, Epoch: 1
+2024-08-29 21:53:16,087 - default_logger - WARNING - Loss is not finite: nan (occurred 244 times)
+2024-08-29 21:53:16,087 - default_logger - WARNING - Batch index: 289, Epoch: 1
+2024-08-29 21:53:16,095 - default_logger - WARNING - Loss is not finite: nan (occurred 245 times)
+2024-08-29 21:53:16,096 - default_logger - WARNING - Batch index: 290, Epoch: 1
+2024-08-29 21:53:16,103 - default_logger - WARNING - Loss is not finite: nan (occurred 246 times)
+2024-08-29 21:53:16,103 - default_logger - WARNING - Batch index: 291, Epoch: 1
+2024-08-29 21:53:16,109 - default_logger - WARNING - Loss is not finite: nan (occurred 247 times)
+2024-08-29 21:53:16,110 - default_logger - WARNING - Batch index: 292, Epoch: 1
+2024-08-29 21:53:16,120 - default_logger - WARNING - Loss is not finite: nan (occurred 248 times)
+2024-08-29 21:53:16,120 - default_logger - WARNING - Batch index: 293, Epoch: 1
+2024-08-29 21:53:16,129 - default_logger - WARNING - Loss is not finite: nan (occurred 249 times)
+2024-08-29 21:53:16,129 - default_logger - WARNING - Batch index: 294, Epoch: 1
+2024-08-29 21:53:16,136 - default_logger - WARNING - Loss is not finite: nan (occurred 250 times)
+2024-08-29 21:53:16,136 - default_logger - WARNING - Batch index: 295, Epoch: 1
+2024-08-29 21:53:16,161 - default_logger - WARNING - Loss is not finite: nan (occurred 251 times)
+2024-08-29 21:53:16,161 - default_logger - WARNING - Batch index: 297, Epoch: 1
+2024-08-29 21:53:16,170 - default_logger - WARNING - Loss is not finite: nan (occurred 252 times)
+2024-08-29 21:53:16,171 - default_logger - WARNING - Batch index: 298, Epoch: 1
+2024-08-29 21:53:16,176 - default_logger - WARNING - Loss is not finite: nan (occurred 253 times)
+2024-08-29 21:53:16,176 - default_logger - WARNING - Batch index: 299, Epoch: 1
+2024-08-29 21:53:16,189 - default_logger - WARNING - Loss is not finite: nan (occurred 254 times)
+2024-08-29 21:53:16,189 - default_logger - WARNING - Batch index: 300, Epoch: 1
+2024-08-29 21:53:16,197 - default_logger - WARNING - Loss is not finite: nan (occurred 255 times)
+2024-08-29 21:53:16,197 - default_logger - WARNING - Batch index: 301, Epoch: 1
+2024-08-29 21:53:16,204 - default_logger - WARNING - Loss is not finite: nan (occurred 256 times)
+2024-08-29 21:53:16,204 - default_logger - WARNING - Batch index: 302, Epoch: 1
+2024-08-29 21:53:16,210 - default_logger - WARNING - Loss is not finite: nan (occurred 257 times)
+2024-08-29 21:53:16,211 - default_logger - WARNING - Batch index: 303, Epoch: 1
+2024-08-29 21:53:16,221 - default_logger - WARNING - Loss is not finite: nan (occurred 258 times)
+2024-08-29 21:53:16,221 - default_logger - WARNING - Batch index: 304, Epoch: 1
+2024-08-29 21:53:16,229 - default_logger - WARNING - Loss is not finite: nan (occurred 259 times)
+2024-08-29 21:53:16,230 - default_logger - WARNING - Batch index: 305, Epoch: 1
+2024-08-29 21:53:16,236 - default_logger - WARNING - Loss is not finite: nan (occurred 260 times)
+2024-08-29 21:53:16,237 - default_logger - WARNING - Batch index: 306, Epoch: 1
+2024-08-29 21:53:16,243 - default_logger - WARNING - Loss is not finite: nan (occurred 261 times)
+2024-08-29 21:53:16,243 - default_logger - WARNING - Batch index: 307, Epoch: 1
+2024-08-29 21:53:16,253 - default_logger - WARNING - Loss is not finite: nan (occurred 262 times)
+2024-08-29 21:53:16,253 - default_logger - WARNING - Batch index: 308, Epoch: 1
+2024-08-29 21:53:16,262 - default_logger - WARNING - Loss is not finite: nan (occurred 263 times)
+2024-08-29 21:53:16,262 - default_logger - WARNING - Batch index: 309, Epoch: 1
+2024-08-29 21:53:16,269 - default_logger - WARNING - Loss is not finite: nan (occurred 264 times)
+2024-08-29 21:53:16,269 - default_logger - WARNING - Batch index: 310, Epoch: 1
+2024-08-29 21:53:16,275 - default_logger - WARNING - Loss is not finite: nan (occurred 265 times)
+2024-08-29 21:53:16,276 - default_logger - WARNING - Batch index: 311, Epoch: 1
+2024-08-29 21:53:16,286 - default_logger - WARNING - Loss is not finite: nan (occurred 266 times)
+2024-08-29 21:53:16,286 - default_logger - WARNING - Batch index: 312, Epoch: 1
+2024-08-29 21:53:16,295 - default_logger - WARNING - Loss is not finite: nan (occurred 267 times)
+2024-08-29 21:53:16,295 - default_logger - WARNING - Batch index: 313, Epoch: 1
+2024-08-29 21:53:16,302 - default_logger - WARNING - Loss is not finite: nan (occurred 268 times)
+2024-08-29 21:53:16,302 - default_logger - WARNING - Batch index: 314, Epoch: 1
+2024-08-29 21:53:16,309 - default_logger - WARNING - Loss is not finite: nan (occurred 269 times)
+2024-08-29 21:53:16,309 - default_logger - WARNING - Batch index: 315, Epoch: 1
+2024-08-29 21:53:16,319 - default_logger - WARNING - Loss is not finite: nan (occurred 270 times)
+2024-08-29 21:53:16,320 - default_logger - WARNING - Batch index: 316, Epoch: 1
+2024-08-29 21:53:16,342 - default_logger - WARNING - Loss is not finite: nan (occurred 271 times)
+2024-08-29 21:53:16,343 - default_logger - WARNING - Batch index: 318, Epoch: 1
+2024-08-29 21:53:16,356 - default_logger - WARNING - Loss is not finite: nan (occurred 272 times)
+2024-08-29 21:53:16,356 - default_logger - WARNING - Batch index: 319, Epoch: 1
+2024-08-29 21:53:16,365 - default_logger - WARNING - Loss is not finite: nan (occurred 273 times)
+2024-08-29 21:53:16,366 - default_logger - WARNING - Batch index: 320, Epoch: 1
+2024-08-29 21:53:16,372 - default_logger - WARNING - Loss is not finite: nan (occurred 274 times)
+2024-08-29 21:53:16,372 - default_logger - WARNING - Batch index: 321, Epoch: 1
+2024-08-29 21:53:16,380 - default_logger - WARNING - Loss is not finite: nan (occurred 275 times)
+2024-08-29 21:53:16,381 - default_logger - WARNING - Batch index: 322, Epoch: 1
+2024-08-29 21:53:16,409 - default_logger - WARNING - Loss is not finite: nan (occurred 276 times)
+2024-08-29 21:53:16,409 - default_logger - WARNING - Batch index: 324, Epoch: 1
+2024-08-29 21:53:16,437 - default_logger - WARNING - Loss is not finite: nan (occurred 277 times)
+2024-08-29 21:53:16,438 - default_logger - WARNING - Batch index: 326, Epoch: 1
+2024-08-29 21:53:16,448 - default_logger - WARNING - Loss is not finite: nan (occurred 278 times)
+2024-08-29 21:53:16,448 - default_logger - WARNING - Batch index: 327, Epoch: 1
+2024-08-29 21:53:16,459 - default_logger - WARNING - Loss is not finite: nan (occurred 279 times)
+2024-08-29 21:53:16,460 - default_logger - WARNING - Batch index: 328, Epoch: 1
+2024-08-29 21:53:16,467 - default_logger - WARNING - Loss is not finite: nan (occurred 280 times)
+2024-08-29 21:53:16,467 - default_logger - WARNING - Batch index: 329, Epoch: 1
+2024-08-29 21:53:16,473 - default_logger - WARNING - Loss is not finite: nan (occurred 281 times)
+2024-08-29 21:53:16,474 - default_logger - WARNING - Batch index: 330, Epoch: 1
+2024-08-29 21:53:16,482 - default_logger - WARNING - Loss is not finite: nan (occurred 282 times)
+2024-08-29 21:53:16,483 - default_logger - WARNING - Batch index: 331, Epoch: 1
+2024-08-29 21:53:16,491 - default_logger - WARNING - Loss is not finite: nan (occurred 283 times)
+2024-08-29 21:53:16,492 - default_logger - WARNING - Batch index: 332, Epoch: 1
+2024-08-29 21:53:16,499 - default_logger - WARNING - Loss is not finite: nan (occurred 284 times)
+2024-08-29 21:53:16,499 - default_logger - WARNING - Batch index: 333, Epoch: 1
+2024-08-29 21:53:16,506 - default_logger - WARNING - Loss is not finite: nan (occurred 285 times)
+2024-08-29 21:53:16,506 - default_logger - WARNING - Batch index: 334, Epoch: 1
+2024-08-29 21:53:16,514 - default_logger - WARNING - Loss is not finite: nan (occurred 286 times)
+2024-08-29 21:53:16,515 - default_logger - WARNING - Batch index: 335, Epoch: 1
+2024-08-29 21:53:16,523 - default_logger - WARNING - Loss is not finite: nan (occurred 287 times)
+2024-08-29 21:53:16,524 - default_logger - WARNING - Batch index: 336, Epoch: 1
+2024-08-29 21:53:16,531 - default_logger - WARNING - Loss is not finite: nan (occurred 288 times)
+2024-08-29 21:53:16,531 - default_logger - WARNING - Batch index: 337, Epoch: 1
+2024-08-29 21:53:16,538 - default_logger - WARNING - Loss is not finite: nan (occurred 289 times)
+2024-08-29 21:53:16,538 - default_logger - WARNING - Batch index: 338, Epoch: 1
+2024-08-29 21:53:16,568 - default_logger - WARNING - Loss is not finite: nan (occurred 290 times)
+2024-08-29 21:53:16,569 - default_logger - WARNING - Batch index: 340, Epoch: 1
+2024-08-29 21:53:16,609 - default_logger - WARNING - Loss is not finite: nan (occurred 291 times)
+2024-08-29 21:53:16,609 - default_logger - WARNING - Batch index: 343, Epoch: 1
+2024-08-29 21:53:16,622 - default_logger - WARNING - Loss is not finite: nan (occurred 292 times)
+2024-08-29 21:53:16,623 - default_logger - WARNING - Batch index: 344, Epoch: 1
+2024-08-29 21:53:16,630 - default_logger - WARNING - Loss is not finite: nan (occurred 293 times)
+2024-08-29 21:53:16,630 - default_logger - WARNING - Batch index: 345, Epoch: 1
+2024-08-29 21:53:16,637 - default_logger - WARNING - Loss is not finite: nan (occurred 294 times)
+2024-08-29 21:53:16,638 - default_logger - WARNING - Batch index: 346, Epoch: 1
+2024-08-29 21:53:16,643 - default_logger - WARNING - Loss is not finite: nan (occurred 295 times)
+2024-08-29 21:53:16,644 - default_logger - WARNING - Batch index: 347, Epoch: 1
+2024-08-29 21:53:16,654 - default_logger - WARNING - Loss is not finite: nan (occurred 296 times)
+2024-08-29 21:53:16,654 - default_logger - WARNING - Batch index: 348, Epoch: 1
+2024-08-29 21:53:16,662 - default_logger - WARNING - Loss is not finite: nan (occurred 297 times)
+2024-08-29 21:53:16,663 - default_logger - WARNING - Batch index: 349, Epoch: 1
+2024-08-29 21:53:16,669 - default_logger - WARNING - Loss is not finite: nan (occurred 298 times)
+2024-08-29 21:53:16,670 - default_logger - WARNING - Batch index: 350, Epoch: 1
+2024-08-29 21:53:16,676 - default_logger - WARNING - Loss is not finite: nan (occurred 299 times)
+2024-08-29 21:53:16,676 - default_logger - WARNING - Batch index: 351, Epoch: 1
+2024-08-29 21:53:16,686 - default_logger - WARNING - Loss is not finite: nan (occurred 300 times)
+2024-08-29 21:53:16,687 - default_logger - WARNING - Batch index: 352, Epoch: 1
+2024-08-29 21:53:16,695 - default_logger - WARNING - Loss is not finite: nan (occurred 301 times)
+2024-08-29 21:53:16,695 - default_logger - WARNING - Batch index: 353, Epoch: 1
+2024-08-29 21:53:16,718 - default_logger - WARNING - Loss is not finite: nan (occurred 302 times)
+2024-08-29 21:53:16,719 - default_logger - WARNING - Batch index: 355, Epoch: 1
+2024-08-29 21:53:16,742 - default_logger - WARNING - Loss is not finite: nan (occurred 303 times)
+2024-08-29 21:53:16,743 - default_logger - WARNING - Batch index: 357, Epoch: 1
+2024-08-29 21:53:16,770 - default_logger - WARNING - Loss is not finite: nan (occurred 304 times)
+2024-08-29 21:53:16,770 - default_logger - WARNING - Batch index: 359, Epoch: 1
+2024-08-29 21:53:16,800 - default_logger - WARNING - Loss is not finite: nan (occurred 305 times)
+2024-08-29 21:53:16,801 - default_logger - WARNING - Batch index: 361, Epoch: 1
+2024-08-29 21:53:16,813 - default_logger - WARNING - Loss is not finite: nan (occurred 306 times)
+2024-08-29 21:53:16,814 - default_logger - WARNING - Batch index: 362, Epoch: 1
+2024-08-29 21:53:16,826 - default_logger - WARNING - Loss is not finite: nan (occurred 307 times)
+2024-08-29 21:53:16,826 - default_logger - WARNING - Batch index: 363, Epoch: 1
+2024-08-29 21:53:16,837 - default_logger - WARNING - Loss is not finite: nan (occurred 308 times)
+2024-08-29 21:53:16,838 - default_logger - WARNING - Batch index: 364, Epoch: 1
+2024-08-29 21:53:16,849 - default_logger - WARNING - Loss is not finite: nan (occurred 309 times)
+2024-08-29 21:53:16,850 - default_logger - WARNING - Batch index: 365, Epoch: 1
+2024-08-29 21:53:16,877 - default_logger - WARNING - Loss is not finite: nan (occurred 310 times)
+2024-08-29 21:53:16,878 - default_logger - WARNING - Batch index: 367, Epoch: 1
+2024-08-29 21:53:16,891 - default_logger - WARNING - Loss is not finite: nan (occurred 311 times)
+2024-08-29 21:53:16,892 - default_logger - WARNING - Batch index: 368, Epoch: 1
+2024-08-29 21:53:16,899 - default_logger - WARNING - Loss is not finite: nan (occurred 312 times)
+2024-08-29 21:53:16,899 - default_logger - WARNING - Batch index: 369, Epoch: 1
+2024-08-29 21:53:16,906 - default_logger - WARNING - Loss is not finite: nan (occurred 313 times)
+2024-08-29 21:53:16,906 - default_logger - WARNING - Batch index: 370, Epoch: 1
+2024-08-29 21:53:16,915 - default_logger - WARNING - Loss is not finite: nan (occurred 314 times)
+2024-08-29 21:53:16,915 - default_logger - WARNING - Batch index: 371, Epoch: 1
+2024-08-29 21:53:16,925 - default_logger - WARNING - Loss is not finite: nan (occurred 315 times)
+2024-08-29 21:53:16,925 - default_logger - WARNING - Batch index: 372, Epoch: 1
+2024-08-29 21:53:16,932 - default_logger - WARNING - Loss is not finite: nan (occurred 316 times)
+2024-08-29 21:53:16,933 - default_logger - WARNING - Batch index: 373, Epoch: 1
+2024-08-29 21:53:16,940 - default_logger - WARNING - Loss is not finite: nan (occurred 317 times)
+2024-08-29 21:53:16,940 - default_logger - WARNING - Batch index: 374, Epoch: 1
+2024-08-29 21:53:16,948 - default_logger - WARNING - Loss is not finite: nan (occurred 318 times)
+2024-08-29 21:53:16,949 - default_logger - WARNING - Batch index: 375, Epoch: 1
+2024-08-29 21:53:16,972 - default_logger - WARNING - Loss is not finite: nan (occurred 319 times)
+2024-08-29 21:53:16,973 - default_logger - WARNING - Batch index: 377, Epoch: 1

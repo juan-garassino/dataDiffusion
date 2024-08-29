@@ -1,140 +1,193 @@
 import argparse
 import os
 import torch
-from torch import nn
-from torch.nn import functional as F
 from torch.utils.data import DataLoader
-from tqdm.auto import tqdm
-import matplotlib.pyplot as plt
 import numpy as np
-
-from embedding import *
-from scheduler import *
-from model import *
-from sourcing import *
-from animate import *
-from generate import *
-
 import matplotlib.pyplot as plt
-import numpy as np
-
-#from tabular_mlp import TabularMLP
-#from dataset_loader import get_dataset
-#from noise_scheduler import NoiseScheduler  # Import the NoiseScheduler
+from src.embedding import PositionalEmbedding
+from src.scheduler import NoiseScheduler, ScoreBasedNoiseScheduler
+from src.model import create_model_and_scheduler
+from src.data_loading import get_dataset
+from src.generate import generate_diffusion_samples, create_animation
+from src.evaluation import (
+    evaluate_generative_model,
+    evaluate_supervised_model,
+    evaluate_generated_data,
+    print_evaluation_results,
+)
+from src.visualization import plot_loss_curve, save_results
+from src.custom_logger import get_default_logger
+from src.tuning import run_hyperparameter_tuning
+from src.train import train_model
+from src.mlflow_utils import setup_experiment
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--experiment_name", type=str, default="california_housing_diffusion")
-    parser.add_argument("--dataset", type=str, default="california", choices=["california"])
+    # Parse arguments
+    parser = argparse.ArgumentParser(description="Train a diffusion model")
+    parser.add_argument(
+        "--experiment_name", type=str, default="california_housing_diffusion"
+    )
+    parser.add_argument(
+        "--dataset", type=str, default="california", choices=["california"]
+    )
     parser.add_argument("--train_batch_size", type=int, default=32)
     parser.add_argument("--eval_batch_size", type=int, default=1000)
-    parser.add_argument("--num_epochs", type=int, default=5)
-    parser.add_argument("--learning_rate", type=float, default=1e-3)
-    parser.add_argument("--hidden_size", type=int, default=128)
-    parser.add_argument("--hidden_layers", type=int, default=3)
+    parser.add_argument(
+        "--num_epochs", type=int, default=100, help="Number of epochs to train"
+    )
+    parser.add_argument(
+        "--learning_rate", type=float, default=1e-6, help="Learning rate"
+    )
+    parser.add_argument(
+        "--hidden_size", type=int, default=32, help="Hidden size of the model"
+    )
+    parser.add_argument(
+        "--num_layers", type=int, default=2, help="Number of layers in the model"
+    )
     parser.add_argument("--dropout", type=float, default=0.1)
     parser.add_argument("--save_model_step", type=int, default=50)
-    parser.add_argument("--num_timesteps", type=int, default=30)
-    parser.add_argument("--beta_schedule", type=str, default="linear", choices=["linear", "quadratic"])
+    parser.add_argument("--num_timesteps", type=int, default=1000)
+    parser.add_argument("--beta_start", type=float, default=0.0001)
+    parser.add_argument("--beta_end", type=float, default=0.02)
+    parser.add_argument(
+        "--beta_schedule", type=str, default="linear", choices=["linear", "quadratic"]
+    )
+    parser.add_argument(
+        "--tune_hyperparameters", action="store_true", help="Run hyperparameter tuning"
+    )
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+    parser.add_argument(
+        "--model_type",
+        type=str,
+        choices=["transformer", "mlp", "score"],
+        default="transformer",
+    )
+    parser.add_argument(
+        "--scheduler_type", type=str, choices=["standard", "score"], default="standard"
+    )
+    parser.add_argument("--input_dim", type=int, default=8)
+    parser.add_argument("--hidden_dim", type=int, default=128)
+    parser.add_argument("--num_heads", type=int, default=4)
+    parser.add_argument("--embedding_type", type=str, default="sinusoidal")
+    parser.add_argument("--batch_size", type=int, default=64)
+    parser.add_argument("--num_samples", type=int, default=1000)
+    parser.add_argument("--accumulation_steps", type=int, default=4)
+    parser.add_argument("--warmup_epochs", type=int, default=5)
+    args = parser.parse_args()
 
-    config, _ = parser.parse_known_args()
+    # Setup logging
+    logger = get_default_logger(args.verbose)
+    logger.info("Starting main process")
 
-    dataset = get_dataset(config.dataset)
+    # Set up experiment
+    outdir = setup_experiment(args.experiment_name)
 
-    dataloader = DataLoader(
-        dataset, batch_size=config.train_batch_size, shuffle=True, drop_last=True)
+    # Load data
+    dataset = get_dataset(args.dataset)
+    dataloader = DataLoader(dataset, batch_size=args.train_batch_size, shuffle=True)
+    input_size = dataset.tensors[0].shape[1]
 
-    model = TabularMLP(
-        input_size=dataset.tensors[0].shape[1],
-        hidden_size=config.hidden_size,
-        hidden_layers=config.hidden_layers,
-        dropout=config.dropout
+    # Hyperparameter tuning
+    if args.tune_hyperparameters:
+        logger.info("Running hyperparameter tuning")
+        best_params = run_hyperparameter_tuning(dataset)
+        # Update args with best parameters
+        for key, value in best_params.items():
+            setattr(args, key, value)
+        logger.info(f"Best hyperparameters: {best_params}")
+
+    # Create model and scheduler
+    model, scheduler = create_model_and_scheduler(args, input_size)
+
+    logger.info(f"Model architecture:\n{model}")
+
+    # Train model
+    losses = train_model(
+        model,
+        dataloader,
+        scheduler,
+        args.num_epochs,
+        args.learning_rate,
+        verbose=True,
+        model_type=args.model_type,
+        accumulation_steps=args.accumulation_steps,
     )
 
-    noise_scheduler = NoiseScheduler(
-        num_timesteps=config.num_timesteps,
-        beta_schedule=config.beta_schedule
+    # Save the trained model
+    torch.save(model.state_dict(), os.path.join(outdir, "trained_model.pth"))
+
+    # Generate samples
+    forward_samples, reverse_samples, device = generate_diffusion_samples(
+        dataset, model, scheduler, args.num_samples, args.num_timesteps
     )
 
-    optimizer = torch.optim.AdamW(
-        model.parameters(),
-        lr=config.learning_rate,
+    # Convert samples to PyTorch tensors and detach them
+    forward_samples = [
+        torch.tensor(sample, device=device).detach() for sample in forward_samples
+    ]
+    reverse_samples = [
+        torch.tensor(sample, device=device).detach() for sample in reverse_samples
+    ]
+
+    # Further processing
+    for t in reversed(range(args.num_timesteps)):
+        t_batch = torch.full((args.num_samples,), t, device=device, dtype=torch.long)
+        if args.model_type == "transformer":
+            src_mask = torch.zeros(
+                (forward_samples[-1].shape[1], forward_samples[-1].shape[1]),
+                device=device,
+            ).bool()
+            model_output = model(forward_samples[-1].unsqueeze(2), src_mask).squeeze(2)
+        else:
+            model_output = model(forward_samples[-1], t_batch.float())
+
+        forward_samples[-1] = scheduler.step(model_output, t, forward_samples[-1])
+        reverse_samples[-1] = scheduler.step(model_output, t, reverse_samples[-1])
+
+    # Create animations
+    forward_animation = create_animation(
+        [sample.cpu().detach().numpy() for sample in forward_samples],
+        "Forward_process",
+        save_dir=outdir,
+    )
+    reverse_animation = create_animation(
+        [sample.cpu().detach().numpy() for sample in reverse_samples],
+        "Reverse_process",
+        save_dir=outdir,
     )
 
-    global_step = 0
-    losses = []
-    print("Training model...")
-    for epoch in range(config.num_epochs):
-        model.train()
-        progress_bar = tqdm(total=len(dataloader))
-        progress_bar.set_description(f"Epoch {epoch}")
-        for step, (batch_X, batch_y) in enumerate(dataloader):
-            batch = batch_X  # We'll use batch_X as our data
-            noise = torch.randn(batch.shape)
-            timesteps = torch.randint(
-                0, noise_scheduler.num_timesteps, (batch.shape[0],)
-            ).long()
+    # Evaluate generative model
+    logger.info("Evaluating generative model")
+    mse, generated_samples = evaluate_generative_model(
+        model, dataset.tensors[0], dataset.tensors[1], scheduler, verbose=args.verbose
+    )
+    logger.info(f"Generative Model Evaluation - MSE: {mse:.4f}")
 
-            noisy = noise_scheduler.add_noise(batch, noise, timesteps)
-            noise_pred = model(noisy, timesteps)
-            loss = F.mse_loss(noise_pred, noise)
+    # Evaluate supervised model
+    logger.info("Evaluating supervised model")
+    eval_dataloader = DataLoader(
+        dataset, batch_size=args.eval_batch_size, shuffle=False
+    )
+    mse, r2 = evaluate_supervised_model(model, eval_dataloader, verbose=args.verbose)
+    logger.info(f"Supervised Model Evaluation - MSE: {mse:.4f}, R2: {r2:.4f}")
 
-            loss.backward()
-            nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optimizer.step()
-            optimizer.zero_grad()
+    # Evaluate generated data
+    logger.info("Evaluating generated data")
+    original_data = dataset.tensors[0]
+    generated_data = reverse_samples[-1]
+    ks_results = evaluate_generated_data(
+        original_data, generated_data, verbose=args.verbose
+    )
+    print_evaluation_results(ks_results)
 
-            progress_bar.update(1)
-            logs = {"loss": loss.detach().item(), "step": global_step}
-            losses.append(loss.detach().item())
-            progress_bar.set_postfix(**logs)
-            global_step += 1
-        progress_bar.close()
+    # Save results
+    logger.info("Saving results")
+    save_results(losses, generated_samples, outdir)
 
-        if (epoch + 1) % config.save_model_step == 0 or epoch == config.num_epochs - 1:
-            print(f"Saving model at epoch {epoch + 1}...")
-            outdir = f"exps/{config.experiment_name}"
-            os.makedirs(outdir, exist_ok=True)
-            torch.save(model.state_dict(), f"{outdir}/model_epoch_{epoch + 1}.pth")
+    # Plot loss curve
+    plot_loss_curve(losses, save_path=f"{outdir}/loss_plot.png", verbose=args.verbose)
 
-    print("Saving final model...")
-    outdir = f"exps/{config.experiment_name}"
-    os.makedirs(outdir, exist_ok=True)
+    # Save model
     torch.save(model.state_dict(), f"{outdir}/model_final.pth")
 
-    print("Generating samples...")
-    model.eval()
-    sample = torch.randn(config.eval_batch_size, dataset.tensors[0].shape[1])
-    timesteps = list(range(noise_scheduler.num_timesteps))[::-1]
-    for i, t in enumerate(tqdm(timesteps)):
-        t = torch.from_numpy(np.repeat(t, config.eval_batch_size)).long()
-        with torch.no_grad():
-            residual = model(sample, t)
-        sample = noise_scheduler.step(residual, t[0], sample)
-
-    print("Saving loss plot...")
-    plt.figure(figsize=(10, 5))
-    plt.plot(losses)
-    plt.title('Training Loss')
-    plt.xlabel('Step')
-    plt.ylabel('MSE Loss')
-    plt.savefig(f"{outdir}/loss_plot.png")
-    plt.close()
-
-    print("Saving loss as numpy array...")
-    np.save(f"{outdir}/loss.npy", np.array(losses))
-
-    print("Saving generated samples...")
-    np.save(f"{outdir}/generated_samples.npy", sample.numpy())
-
-    print("Training complete!")
-
-    ######################################
-
-    #num_features = 8 #samples[0].shape[1]  # Get the number of features from the first sample
-
-    forward_samples, reverse_samples = generate_diffusion_samples(dataset, model, noise_scheduler, 120, num_timesteps=config.num_timesteps)
-
-    forward_animation = create_animation(forward_samples, "Forward_process", save_dir="forward_plots")
-
-    reverse_animation = create_animation(reverse_samples, "Reverse_process", save_dir="reverse_plots")
+    logger.info("Main process completed")
