@@ -1,0 +1,53 @@
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Getting dataset: california
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,323 INFO Loading California Housing dataset
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,342 INFO California Housing dataset loaded. Shape: torch.Size([20640, 8])
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:02:32,369 INFO Initialized NoiseScheduler with 30 timesteps
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,625 INFO Evaluating generated data
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:30,626 INFO Creating correlation heatmaps
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
+2024-08-29 13:06:31,534 INFO Correlation heatmaps saved
