@@ -166,6 +166,11 @@ class NoiseScheduler:
 
 
 class ScoreBasedNoiseScheduler(NoiseScheduler):
+    def __init__(self, num_timesteps=1000, beta_start=0.0001, beta_end=0.02, beta_schedule="linear"):
+        super().__init__(num_timesteps, beta_start, beta_end, beta_schedule)
+        self.sqrt_alphas_cumprod = torch.sqrt(torch.cumprod(1 - self.betas, dim=0))
+        self.sqrt_1m_alphas_cumprod = torch.sqrt(1 - torch.cumprod(1 - self.betas, dim=0))
+
     def step(self, score, t, x):
         # Euler-Maruyama step for reverse-time SDE
         dt = -1 / self.num_timesteps

@@ -1,8 +1,0 @@
-2024-08-29 21:21:18,365 - default_logger - INFO - Starting main process
-2024-08-29 21:21:18,365 - default_logger - INFO - Starting main process
-2024-08-29 21:21:18,533 - default_logger - INFO - Getting dataset: california
-2024-08-29 21:21:18,533 - default_logger - INFO - Getting dataset: california
-2024-08-29 21:21:18,534 - default_logger - INFO - Loading California Housing dataset
-2024-08-29 21:21:18,534 - default_logger - INFO - Loading California Housing dataset
-2024-08-29 21:21:18,547 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])
-2024-08-29 21:21:18,547 - default_logger - INFO - California Housing dataset loaded. Shape: torch.Size([20640, 8])

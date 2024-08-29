@@ -217,6 +217,8 @@ class ScoreNetwork(nn.Module):
 
 
 def create_model_and_scheduler(config, input_size):
+    embedding_kwargs = getattr(config, 'embedding_kwargs', {})
+    
     if config.model_type == "mlp":
         model = TabularMLP(
             input_size=input_size,
@@ -224,7 +226,7 @@ def create_model_and_scheduler(config, input_size):
             hidden_layers=config.num_layers,
             dropout=config.dropout,
             embedding_type=config.embedding_type,
-            **config.embedding_kwargs,
+            **embedding_kwargs,
         )
     elif config.model_type == "transformer":
         model = TabularTransformer(
@@ -234,7 +236,7 @@ def create_model_and_scheduler(config, input_size):
             num_heads=config.num_heads,
             dropout=config.dropout,
             embedding_type=config.embedding_type,
-            **config.embedding_kwargs,
+            **embedding_kwargs,
         )
     elif config.model_type == "score":
         model = ScoreNetwork(
@@ -242,7 +244,7 @@ def create_model_and_scheduler(config, input_size):
             hidden_dim=config.hidden_size,
             num_layers=config.num_layers,
             embedding_type=config.embedding_type,
-            **config.embedding_kwargs,
+            **embedding_kwargs,
         )
     else:
         raise ValueError(f"Unknown model type: {config.model_type}")

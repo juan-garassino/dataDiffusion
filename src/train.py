@@ -57,7 +57,8 @@ def train_model(
                 timesteps = torch.randint(
                     0, len(scheduler), (x.shape[0],), device=device
                 ).long()
-                noisy_x, noise = scheduler.add_noise(x, timesteps)
+                noise = torch.randn_like(x)
+                noisy_x = scheduler.add_noise(x, noise, timesteps)
 
                 score = model(noisy_x, timesteps)
 

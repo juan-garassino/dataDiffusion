@@ -20,59 +20,67 @@ from src.custom_logger import get_default_logger
 from src.tuning import run_hyperparameter_tuning
 from src.train import train_model
 from src.mlflow_utils import setup_experiment
+import json
 
 if __name__ == "__main__":
     # Parse arguments
     parser = argparse.ArgumentParser(description="Train a diffusion model")
+    
     parser.add_argument(
-        "--experiment_name", type=str, default="california_housing_diffusion"
-    )
+        "--experiment_name", type=str, default="california_housing_diffusion")
     parser.add_argument(
-        "--dataset", type=str, default="california", choices=["california"]
-    )
-    parser.add_argument("--train_batch_size", type=int, default=32)
-    parser.add_argument("--eval_batch_size", type=int, default=1000)
+        "--dataset", type=str, default="california", choices=["california"])
     parser.add_argument(
-        "--num_epochs", type=int, default=100, help="Number of epochs to train"
-    )
+        "--train_batch_size", type=int, default=32)
     parser.add_argument(
-        "--learning_rate", type=float, default=1e-6, help="Learning rate"
-    )
+        "--eval_batch_size", type=int, default=1000)
     parser.add_argument(
-        "--hidden_size", type=int, default=32, help="Hidden size of the model"
-    )
+        "--num_epochs", type=int, default=100, help="Number of epochs to train")
     parser.add_argument(
-        "--num_layers", type=int, default=2, help="Number of layers in the model"
-    )
-    parser.add_argument("--dropout", type=float, default=0.1)
-    parser.add_argument("--save_model_step", type=int, default=50)
-    parser.add_argument("--num_timesteps", type=int, default=1000)
-    parser.add_argument("--beta_start", type=float, default=0.0001)
-    parser.add_argument("--beta_end", type=float, default=0.02)
+        "--learning_rate", type=float, default=1e-6, help="Learning rate")
     parser.add_argument(
-        "--beta_schedule", type=str, default="linear", choices=["linear", "quadratic"]
-    )
+        "--hidden_size", type=int, default=32, help="Hidden size of the model")
     parser.add_argument(
-        "--tune_hyperparameters", action="store_true", help="Run hyperparameter tuning"
-    )
-    parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+        "--num_layers", type=int, default=2, help="Number of layers in the model")
     parser.add_argument(
-        "--model_type",
-        type=str,
-        choices=["transformer", "mlp", "score"],
-        default="transformer",
-    )
+        "--dropout", type=float, default=0.1)
     parser.add_argument(
-        "--scheduler_type", type=str, choices=["standard", "score"], default="standard"
-    )
-    parser.add_argument("--input_dim", type=int, default=8)
-    parser.add_argument("--hidden_dim", type=int, default=128)
-    parser.add_argument("--num_heads", type=int, default=4)
-    parser.add_argument("--embedding_type", type=str, default="sinusoidal")
-    parser.add_argument("--batch_size", type=int, default=64)
-    parser.add_argument("--num_samples", type=int, default=1000)
-    parser.add_argument("--accumulation_steps", type=int, default=4)
-    parser.add_argument("--warmup_epochs", type=int, default=5)
+        "--save_model_step", type=int, default=50)
+    parser.add_argument(
+        "--num_timesteps", type=int, default=1000)
+    parser.add_argument(
+        "--beta_start", type=float, default=0.0001)
+    parser.add_argument(
+        "--beta_end", type=float, default=0.02)
+    parser.add_argument(
+        "--beta_schedule", type=str, default="linear", choices=["linear", "quadratic"])
+    parser.add_argument(
+        "--tune_hyperparameters", action="store_true", help="Run hyperparameter tuning")
+    parser.add_argument(
+        "--verbose", action="store_true", help="Enable verbose output")
+    parser.add_argument(
+        "--model_type", type=str, choices=["transformer", "mlp", "score"], default="mlp")
+    parser.add_argument(
+        "--scheduler_type", type=str, choices=["standard", "score"], default="standard")
+    parser.add_argument(
+        "--embedding_type", type=str, choices=["sinusoidal", "linear", "learnable", "identity", "zero"], default="linear")
+    parser.add_argument(
+        "--embedding_kwargs", type=json.loads, default="{}", 
+        help="Additional embedding kwargs as JSON string")
+    parser.add_argument(
+        "--input_dim", type=int, default=8)
+    parser.add_argument(
+        "--hidden_dim", type=int, default=128)
+    parser.add_argument(
+        "--num_heads", type=int, default=4)
+    parser.add_argument(
+        "--batch_size", type=int, default=64)
+    parser.add_argument(
+        "--num_samples", type=int, default=1000)
+    parser.add_argument(
+        "--accumulation_steps", type=int, default=4)
+    parser.add_argument(
+        "--warmup_epochs", type=int, default=5)
     args = parser.parse_args()
 
     # Setup logging
