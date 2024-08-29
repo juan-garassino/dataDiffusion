@@ -179,6 +179,8 @@ class ScoreBasedNoiseScheduler(NoiseScheduler):
         diffusion = torch.sqrt(self.betas[t].clamp(min=1e-5))
         x_prev = x + drift * dt + diffusion * np.sqrt(abs(dt)) * z
         return x_prev
+    
+    
 
 
 if __name__ == "__main__":

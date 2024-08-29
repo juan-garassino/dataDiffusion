@@ -31,7 +31,7 @@ def train_model(
         optimizer,
         max_lr=learning_rate,
         epochs=num_epochs,
-        steps_per_epoch=len(dataloader) // accumulation_steps,
+        steps_per_epoch=len(dataloader),  # Remove the division by accumulation_steps
         pct_start=0.3,
         anneal_strategy="cos",
         div_factor=10.0,
@@ -97,7 +97,8 @@ def train_model(
                     dataloader
                 ):
                     optimizer.step()
-                    lr_scheduler.step()
+                    if (batch_idx + 1) % accumulation_steps == 0:
+                        lr_scheduler.step()
                     optimizer.zero_grad()  # Clear gradients after accumulation
 
                 epoch_losses.append(
