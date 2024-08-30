@@ -12,11 +12,25 @@ from .embedding import (
 )
 from .scheduler import NoiseScheduler, ScoreBasedNoiseScheduler
 from .custom_logger import get_default_logger
-from .data_utils import prepare_data
+# from .data_utils import prepare_data
 from .train import train_model
 from .evaluation import evaluate_generative_model
 
-logger = get_default_logger()
+import torch
+import torch.nn as nn
+import logging
+
+
+
+from .embedding import (
+    SinusoidalEmbedding,
+    LinearEmbedding,
+    LearnableEmbedding,
+    IdentityEmbedding,
+    ZeroEmbedding,
+)
+
+logger = get_default_logger(verbose=False)
 
 
 class TabularMLP(nn.Module):
@@ -132,86 +146,120 @@ class TabularTransformer(nn.Module):
 
         return x
 
-
 class ScoreNetwork(nn.Module):
     def __init__(
         self,
-        input_dim,
-        hidden_dim,
-        num_layers,
-        embedding_type="sinusoidal",
-        **embedding_kwargs,
+        input_dim: int,
+        hidden_dim: int,
+        num_layers: int,
+        dropout: float = 0.1,
+        embedding_type: str = "sinusoidal",
+        **embedding_kwargs
     ):
         super().__init__()
         self.input_dim = input_dim
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
 
+        self.input_proj = nn.Linear(input_dim, hidden_dim)
+        self.layers = nn.ModuleList([
+            nn.Sequential(
+                nn.Linear(hidden_dim, hidden_dim),
+                nn.LayerNorm(hidden_dim),
+                nn.SiLU(),
+                nn.Dropout(dropout),
+            ) for _ in range(num_layers)
+        ])
+        self.final = nn.Linear(hidden_dim, input_dim)
+
         # Time embedding
         if embedding_type == "sinusoidal":
-            self.time_embed = SinusoidalEmbedding(hidden_dim, **embedding_kwargs)
+            self.time_embedding = SinusoidalEmbedding(hidden_dim, **embedding_kwargs)
         elif embedding_type == "linear":
-            self.time_embed = LinearEmbedding(hidden_dim, **embedding_kwargs)
+            self.time_embedding = LinearEmbedding(hidden_dim, **embedding_kwargs)
         elif embedding_type == "learnable":
-            self.time_embed = LearnableEmbedding(hidden_dim)
+            self.time_embedding = LearnableEmbedding(hidden_dim)
         elif embedding_type == "identity":
-            self.time_embed = IdentityEmbedding()
+            self.time_embedding = IdentityEmbedding()
         elif embedding_type == "zero":
-            self.time_embed = ZeroEmbedding()
+            self.time_embedding = ZeroEmbedding()
         else:
             raise ValueError(f"Unknown embedding type: {embedding_type}")
 
-        # Input projection
-        self.input_proj = nn.Linear(input_dim, hidden_dim)
-
-        # Main layers
-        self.layers = nn.ModuleList(
-            [
-                nn.Sequential(
-                    nn.Linear(hidden_dim, hidden_dim),
-                    nn.LayerNorm(hidden_dim),
-                    nn.Tanh(),
-                )
-                for _ in range(num_layers)
-            ]
-        )
-
-        # Output projection
-        self.final = nn.Linear(hidden_dim, input_dim)
-
-        # Initialize weights with higher gain
         self.apply(self._init_weights)
 
     def _init_weights(self, module):
         if isinstance(module, nn.Linear):
-            nn.init.xavier_uniform_(module.weight, gain=1.0)  # Increased gain
+            nn.init.xavier_uniform_(module.weight, gain=1.0)
             if module.bias is not None:
                 nn.init.zeros_(module.bias)
 
-    def forward(self, x, t):
-        # Normalize input with a higher epsilon to avoid division by zero
-        x = (x - x.mean(dim=1, keepdim=True)) / (x.std(dim=1, keepdim=True) + 1e-4)
+    def safe_normalize(self, x, dim=1, eps=1e-8):
+        logger.debug(f"Input to safe_normalize - shape: {x.shape}, min: {x.min().item():.4f}, max: {x.max().item():.4f}")
 
-        # Time embedding
-        t = t.view(-1, 1).float() / 1000.0  # Normalize time to [0, 1]
-        t_embed = self.time_embed(t)  # (batch_size, hidden_dim)
+        mean = x.mean(dim=dim, keepdim=True)
+        logger.debug(f"Mean - shape: {mean.shape}, min: {mean.min().item():.4f}, max: {mean.max().item():.4f}")
 
-        # Input projection
-        x = self.input_proj(x)  # (batch_size, input_dim) -> (batch_size, hidden_dim)
-        x = x + t_embed.unsqueeze(
-            1
-        )  # (batch_size, hidden_dim) + (batch_size, 1, hidden_dim) -> (batch_size, input_dim, hidden_dim)
+        var = x.var(dim=dim, keepdim=True, unbiased=False)
+        logger.debug(f"Variance - shape: {var.shape}, min: {var.min().item():.4f}, max: {var.max().item():.4f}")
 
-        # Main layers
-        for layer in self.layers:
-            x = layer(
-                x
-            )  # (batch_size, input_dim, hidden_dim) -> (batch_size, input_dim, hidden_dim)
+        std = torch.sqrt(var + eps)
+        logger.debug(f"Standard deviation - shape: {std.shape}, min: {std.min().item():.4f}, max: {std.max().item():.4f}")
 
-        # Output projection
-        x = self.final(
-            x
-        )  # (batch_size, input_dim, hidden_dim) -> (batch_size, input_dim, input_dim)
+        normalized = (x - mean) / std
+        logger.debug(f"Normalized - shape: {normalized.shape}, min: {normalized.min().item():.4f}, max: {normalized.max().item():.4f}")
+
+        if torch.isnan(normalized).any() or torch.isinf(normalized).any():
+            logger.warning("Detected NaN or Inf values after normalization. Using alternative normalization.")
+            return x - mean
+
+        return normalized
+
+    def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
+        logger.debug(f"Input x - shape: {x.shape}, dtype: {x.dtype}")
+        logger.debug(f"Input x - min: {x.min().item():.4f}, max: {x.max().item():.4f}, mean: {x.mean().item():.4f}, std: {x.std().item():.4f}")
+        logger.debug(f"Input t - shape: {t.shape}, dtype: {t.dtype}")
+        logger.debug(f"Input t - min: {t.min().item()}, max: {t.max().item()}, mean: {t.float().mean().item():.4f}, std: {t.float().std().item():.4f}")
+
+        if torch.isnan(x).any() or torch.isinf(x).any():
+            logger.error("NaN or Inf detected in input x")
+            raise ValueError("NaN or Inf detected in input x")
+
+        x_normalized = self.safe_normalize(x)
+
+        if torch.isnan(x_normalized).any() or torch.isinf(x_normalized).any():
+            logger.error("NaN or Inf detected after normalization")
+            logger.error(f"x stats: min={x.min().item():.4f}, max={x.max().item():.4f}, mean={x.mean().item():.4f}, std={x.std().item():.4f}")
+            raise ValueError("NaN or Inf detected after normalization")
+
+        logger.debug(f"Normalized x - min: {x_normalized.min().item():.4f}, max: {x_normalized.max().item():.4f}, mean: {x_normalized.mean().item():.4f}, std: {x_normalized.std().item():.4f}")
+
+        t_embed = self.time_embedding(t.float())
+        logger.debug(f"Time embedding - min: {t_embed.min().item():.4f}, max: {t_embed.max().item():.4f}, mean: {t_embed.mean().item():.4f}, std: {t_embed.std().item():.4f}")
+
+        x = self.input_proj(x_normalized)
+        x = x + t_embed.unsqueeze(1)
+
+        if torch.isnan(x).any() or torch.isinf(x).any():
+            logger.error("NaN or Inf detected after input projection")
+            raise ValueError("NaN or Inf detected after input projection")
+
+        logger.debug(f"After input projection - min: {x.min().item():.4f}, max: {x.max().item():.4f}, mean: {x.mean().item():.4f}, std: {x.std().item():.4f}")
+
+        for i, layer in enumerate(self.layers):
+            x = layer(x) + x  # Residual connection
+            if torch.isnan(x).any() or torch.isinf(x).any():
+                logger.error(f"NaN or Inf detected after layer {i}")
+                raise ValueError(f"NaN or Inf detected after layer {i}")
+            logger.debug(f"After layer {i} - min: {x.min().item():.4f}, max: {x.max().item():.4f}, mean: {x.mean().item():.4f}, std: {x.std().item():.4f}")
+
+        x = self.final(x)
+
+        if torch.isnan(x).any() or torch.isinf(x).any():
+            logger.error("NaN or Inf detected in output")
+            raise ValueError("NaN or Inf detected in output")
+
+        logger.debug(f"Output - min: {x.min().item():.4f}, max: {x.max().item():.4f}, mean: {x.mean().item():.4f}, std: {x.std().item():.4f}")
 
         return x
 

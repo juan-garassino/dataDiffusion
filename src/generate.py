@@ -6,7 +6,10 @@ from src.scheduler import ScoreBasedNoiseScheduler
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import os
+import logging
+from .custom_logger import get_default_logger
 
+logger = get_default_logger(verbose=False)
 
 def generate_diffusion_samples(dataset, model, scheduler, num_samples, num_timesteps):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -21,11 +24,8 @@ def generate_diffusion_samples(dataset, model, scheduler, num_samples, num_times
 
     for t in range(num_timesteps):
         timesteps = torch.full((num_samples,), t, dtype=torch.long, device=device)
-        if isinstance(scheduler, ScoreBasedNoiseScheduler):
-            sample, _ = scheduler.add_noise(x0, timesteps)
-        else:
-            noise = torch.randn_like(x0)
-            sample = scheduler.add_noise(x0, noise, timesteps)
+        noise = torch.randn_like(x0)
+        sample = scheduler.add_noise(x0, noise, timesteps)
         forward_samples.append(sample.cpu().numpy())
 
     # Reverse process
@@ -37,11 +37,7 @@ def generate_diffusion_samples(dataset, model, scheduler, num_samples, num_times
         with torch.no_grad():
             model_output = model(sample, timesteps.float())
 
-        if isinstance(scheduler, ScoreBasedNoiseScheduler):
-            sample = scheduler.step(model_output, timesteps[0], sample)
-        else:
-            sample = scheduler.step(model_output, timesteps[0], sample)
-
+        sample = scheduler.step(model_output, timesteps[0], sample)
         reverse_samples.append(sample.cpu().numpy())
 
     return forward_samples, reverse_samples, device

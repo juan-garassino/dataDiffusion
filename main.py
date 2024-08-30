@@ -21,6 +21,9 @@ from src.tuning import run_hyperparameter_tuning
 from src.train import train_model
 from src.mlflow_utils import setup_experiment
 import json
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 if __name__ == "__main__":
     # Parse arguments

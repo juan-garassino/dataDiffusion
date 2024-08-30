@@ -1,45 +1,24 @@
 import torch
-from torch import nn
+import torch.nn as nn
+import logging
 from torch.optim import Adam
 from torch.optim.lr_scheduler import OneCycleLR
 from tqdm import tqdm
 from src.custom_logger import get_default_logger
 
+logger = get_default_logger(verbose=False)
 
-def train_model(
-    model,
-    dataloader,
-    scheduler,
-    num_epochs,
-    learning_rate,
-    verbose=False,
-    model_type="standard",
-    accumulation_steps=1,
-):
-    logger = get_default_logger(verbose)
+def train_model(model, dataloader, scheduler, num_epochs, learning_rate, verbose=False, model_type="standard", accumulation_steps=1):
     logger.info(f"Starting {model_type} model training")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
-    optimizer = torch.optim.AdamW(
-        model.parameters(), lr=learning_rate, weight_decay=1e-6
-    )
-
-    # Adjust div_factor and final_div_factor to avoid extreme LR changes
-    lr_scheduler = OneCycleLR(
-        optimizer,
-        max_lr=learning_rate,
-        epochs=num_epochs,
-        steps_per_epoch=len(dataloader),  # Remove the division by accumulation_steps
-        pct_start=0.3,
-        anneal_strategy="cos",
-        div_factor=10.0,
-        final_div_factor=500.0,
-    )
+    optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-6)
+    lr_scheduler = OneCycleLR(optimizer, max_lr=learning_rate, epochs=num_epochs, steps_per_epoch=len(dataloader),
+                              pct_start=0.3, anneal_strategy="cos", div_factor=10.0, final_div_factor=500.0)
 
     losses = []
-    nan_count = 0
 
     for epoch in range(num_epochs):
         model.train()
@@ -53,84 +32,44 @@ def train_model(
             if batch_idx % accumulation_steps == 0:
                 optimizer.zero_grad()
 
-            try:
-                timesteps = torch.randint(
-                    0, len(scheduler), (x.shape[0],), device=device
-                ).long()
-                noise = torch.randn_like(x)
-                noisy_x = scheduler.add_noise(x, noise, timesteps)
+            timesteps = torch.randint(0, len(scheduler), (x.shape[0],), device=device).long()
+            noise = torch.randn_like(x)
+            noisy_x = scheduler.add_noise(x, noise, timesteps)
 
-                score = model(noisy_x, timesteps)
+            logger.debug(f"Batch {batch_idx} - noisy_x stats: min={noisy_x.min().item():.4f}, max={noisy_x.max().item():.4f}, mean={noisy_x.mean().item():.4f}, std={noisy_x.std().item():.4f}")
 
-                target_score = -noise / (
-                    scheduler.sqrt_1m_alphas_cumprod[timesteps].view(-1, 1) + 1e-8
-                )
+            score = model(noisy_x, timesteps)
 
-                # Check for NaNs or Infs before loss calculation
-                assert torch.isfinite(score).all(), "Score contains NaNs or Infs"
-                assert torch.isfinite(
-                    target_score
-                ).all(), "Target score contains NaNs or Infs"
-                assert torch.isfinite(
-                    noisy_x
-                ).all(), "Noisy input contains NaNs or Infs"
-
-                # Loss calculation
-                loss = torch.nn.functional.smooth_l1_loss(score, target_score)
-
-                if not torch.isfinite(loss):
-                    nan_count += 1
-                    logger.warning(
-                        f"Loss is not finite: {loss.item()} (occurred {nan_count} times)"
-                    )
-                    logger.warning(f"Batch index: {batch_idx}, Epoch: {epoch+1}")
-                    continue
-
-                # Normalize loss by accumulation steps
-                loss = loss / accumulation_steps
-                loss.backward()
-
-                # Clip gradients
-                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
-
-                if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(
-                    dataloader
-                ):
-                    optimizer.step()
-                    if (batch_idx + 1) % accumulation_steps == 0:
-                        lr_scheduler.step()
-                    optimizer.zero_grad()  # Clear gradients after accumulation
-
-                epoch_losses.append(
-                    loss.item() * accumulation_steps
-                )  # Multiply back to log the original scale
-                progress_bar.set_postfix(
-                    {
-                        "loss": f"{loss.item() * accumulation_steps:.4f}",
-                        "lr": f"{optimizer.param_groups[0]['lr']:.2e}",
-                    }
-                )
-            except RuntimeError as e:
-                logger.error(f"Error during training: {str(e)}")
-                logger.error(
-                    f"x shape: {x.shape}, noisy_x shape: {noisy_x.shape}, timesteps shape: {timesteps.shape}"
-                )
-                for name, param in model.named_parameters():
-                    logger.error(f"{name} shape: {param.shape}")
+            if torch.isnan(score).any() or torch.isinf(score).any():
+                logger.warning(f"NaN or Inf detected in score at batch {batch_idx}, epoch {epoch+1}")
                 continue
 
-        if epoch_losses:
-            avg_loss = sum(epoch_losses) / len(epoch_losses)
-            losses.append(avg_loss)
-            logger.info(
-                f"Epoch {epoch+1}/{num_epochs}, Average Loss: {avg_loss:.4f}, LR: {optimizer.param_groups[0]['lr']:.2e}"
-            )
-        else:
-            logger.warning(f"Epoch {epoch+1}/{num_epochs} had no valid losses")
+            logger.debug(f"Batch {batch_idx} - score stats: min={score.min().item():.4f}, max={score.max().item():.4f}, mean={score.mean().item():.4f}, std={score.std().item():.4f}")
 
-    logger.info(f"Model training completed. NaN losses occurred {nan_count} times.")
+            target_score = -noise / (scheduler.sqrt_1m_alphas_cumprod[timesteps].view(-1, 1) + 1e-8)
+
+            logger.debug(f"Batch {batch_idx} - target_score stats: min={target_score.min().item():.4f}, max={target_score.max().item():.4f}, mean={target_score.mean().item():.4f}, std={target_score.std().item():.4f}")
+
+            loss = torch.nn.functional.mse_loss(score, target_score)
+
+            if torch.isnan(loss) or torch.isinf(loss):
+                logger.warning(f"NaN or Inf loss at batch {batch_idx}, epoch {epoch+1}")
+                continue
+
+            loss = loss / accumulation_steps
+            loss.backward()
+
+            if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(dataloader):
+                torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+                optimizer.step()
+                lr_scheduler.step()
+
+            epoch_losses.append(loss.item() * accumulation_steps)
+            progress_bar.set_postfix({"Loss": f"{loss.item():.4f}"})
+
+        avg_loss = sum(epoch_losses) / len(epoch_losses)
+        losses.append(avg_loss)
+        logger.info(f"Epoch {epoch+1}/{num_epochs}, Average Loss: {avg_loss:.4f}, LR: {lr_scheduler.get_last_lr()[0]:.2e}")
+
+    logger.info("Model training completed.")
     return losses
-
-
-# Example usage in main.py:
-# losses = train_model(model, dataloader, noise_scheduler, args.num_epochs, args.learning_rate, args.verbose)

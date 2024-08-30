@@ -2,12 +2,11 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 import pandas as pd
-from src.custom_logger import setup_logger
+from .custom_logger import setup_logger
 import mlflow
-from .data_utils import normalize_data, denormalize_data
+from .data_utils import normalize_data, denormalize_data, prepare_data
 
 logger = setup_logger("scheduler", "logs/scheduler.log")
-
 
 class NoiseScheduler:
     def __init__(
@@ -131,38 +130,24 @@ class NoiseScheduler:
         """
         return self.num_timesteps
 
-    @staticmethod
-    def normalize_data(data):
-        """
-        Normalize the input data to have zero mean and unit variance.
-        """
-        if isinstance(data, pd.DataFrame):
-            mean = data.mean()
-            std = data.std()
-            normalized_data = (data - mean) / std
-        else:
-            mean = np.mean(data, axis=0)
-            std = np.std(data, axis=0)
-            normalized_data = (data - mean) / std
-        return normalized_data, mean, std
-
-    @staticmethod
-    def denormalize_data(normalized_data, mean, std):
-        """
-        Denormalize the data using stored mean and standard deviation.
-        """
-        return normalized_data * std + mean
-
     def prepare_data(self, data):
         """
         Prepare the input data for the diffusion process.
         """
-        normalized_data, self.data_mean, self.data_std = self.normalize_data(data)
-        return torch.FloatTensor(
-            normalized_data.values
-            if isinstance(normalized_data, pd.DataFrame)
-            else normalized_data
-        )
+        return prepare_data(data)
+
+    def normalize_data(self, data):
+        """
+        Normalize the input data to have zero mean and unit variance.
+        """
+        normalized_data, self.data_mean, self.data_std = normalize_data(data)
+        return normalized_data
+
+    def denormalize_data(self, normalized_data):
+        """
+        Denormalize the data using stored mean and standard deviation.
+        """
+        return denormalize_data(normalized_data, self.data_mean, self.data_std)
 
 
 class ScoreBasedNoiseScheduler(NoiseScheduler):
@@ -170,6 +155,11 @@ class ScoreBasedNoiseScheduler(NoiseScheduler):
         super().__init__(num_timesteps, beta_start, beta_end, beta_schedule)
         self.sqrt_alphas_cumprod = torch.sqrt(torch.cumprod(1 - self.betas, dim=0))
         self.sqrt_1m_alphas_cumprod = torch.sqrt(1 - torch.cumprod(1 - self.betas, dim=0))
+
+    def add_noise(self, x_start, noise, timesteps):
+        sqrt_alphas_cumprod = self.sqrt_alphas_cumprod[timesteps].view(-1, 1, 1, 1)
+        sqrt_one_minus_alphas_cumprod = self.sqrt_1m_alphas_cumprod[timesteps].view(-1, 1, 1, 1)
+        return sqrt_alphas_cumprod * x_start + sqrt_one_minus_alphas_cumprod * noise
 
     def step(self, score, t, x):
         # Euler-Maruyama step for reverse-time SDE
