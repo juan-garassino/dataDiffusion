@@ -5,4 +5,8 @@ matplotlib
 seaborn
 mlflow
 pytest
-logger
+scikit-learn
+scipy
+optuna
+pyyaml
+tqdm
