@@ -1,12 +1,19 @@
 """Feature matrix animation for diffusion process visualisation."""
 
 import os
+from typing import List, Optional
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 
-def create_animation(samples_list, process_name, max_samples=100, save_dir=None):
+def create_animation(
+    samples_list: List[np.ndarray],
+    process_name: str,
+    max_samples: int = 100,
+    save_dir: Optional[str] = None,
+) -> animation.FuncAnimation:
     """Animate a pairwise feature plot over the diffusion steps.
 
     Parameters

@@ -1,12 +1,19 @@
 """Real vs synthetic distribution comparison plots."""
 
 import os
+from typing import List, Optional
+
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_marginal_distributions(real, synthetic, feature_names=None, save_path=None):
+def plot_marginal_distributions(
+    real: np.ndarray,
+    synthetic: np.ndarray,
+    feature_names: Optional[List[str]] = None,
+    save_path: Optional[str] = None,
+) -> None:
     """Overlaid real vs synthetic histograms, one panel per feature (4 per row).
 
     Parameters
@@ -44,7 +51,9 @@ def plot_marginal_distributions(real, synthetic, feature_names=None, save_path=N
     plt.close(fig)
 
 
-def plot_correlation_comparison(real, synthetic, save_path=None):
+def plot_correlation_comparison(
+    real: np.ndarray, synthetic: np.ndarray, save_path: Optional[str] = None
+) -> None:
     """Real vs synthetic correlation heatmaps side by side.
 
     Parameters

@@ -1,6 +1,8 @@
 """Trainer with validation loop, early stopping, EMA, and loss selection by model type."""
 
 import copy
+from typing import List, Tuple
+
 import torch
 from torch.utils.data import DataLoader, TensorDataset, random_split
 from torch.optim.lr_scheduler import OneCycleLR
@@ -69,7 +71,17 @@ class Trainer:
             return indices.to(device)
         return torch.randint(0, num_timesteps, (batch_size,), device=device).long()
 
-    def train(self, model, scheduler, dataset: TensorDataset):
+    def _loss_kwargs(self, predicted, noise, scheduler, timesteps) -> dict:
+        """Keyword arguments for the loss function; the score loss also needs the schedule."""
+        kwargs = dict(predicted=predicted, noise=noise)
+        if self.config.model.model_type == "score":
+            kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+            kwargs["timesteps"] = timesteps
+        return kwargs
+
+    def train(
+        self, model: torch.nn.Module, scheduler, dataset: TensorDataset
+    ) -> Tuple[List[float], List[float]]:
         """Train ``model`` in place and return the loss history.
 
         Parameters
@@ -144,12 +156,7 @@ class Trainer:
                     optimizer.zero_grad()
                     continue
 
-                loss_kwargs = dict(predicted=predicted, noise=noise)
-                if self.config.model.model_type == "score":
-                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
-                    loss_kwargs["timesteps"] = timesteps
-
-                loss = loss_fn(**loss_kwargs)
+                loss = loss_fn(**self._loss_kwargs(predicted, noise, scheduler, timesteps))
 
                 if torch.isnan(loss) or torch.isinf(loss):
                     logger.warning("NaN/Inf loss at epoch %d batch %d — skipping", epoch + 1, batch_idx)
@@ -183,12 +190,7 @@ class Trainer:
                     noisy_x = scheduler.add_noise(x, noise, timesteps)
                     predicted = model(noisy_x, timesteps)
 
-                    loss_kwargs = dict(predicted=predicted, noise=noise)
-                    if self.config.model.model_type == "score":
-                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
-                        loss_kwargs["timesteps"] = timesteps
-
-                    val_loss = loss_fn(**loss_kwargs)
+                    val_loss = loss_fn(**self._loss_kwargs(predicted, noise, scheduler, timesteps))
                     val_epoch_losses.append(val_loss.item())
 
             avg_val = sum(val_epoch_losses) / max(len(val_epoch_losses), 1)

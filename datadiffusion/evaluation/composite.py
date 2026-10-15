@@ -1,6 +1,6 @@
 """Composite quality score and diagnostics."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Optional
 
 import numpy as np
@@ -70,12 +70,12 @@ class QualityMetrics:
     composite_score: float
 
     @property
-    def passed_features(self):
+    def passed_features(self) -> List[FeatureReport]:
         """Feature reports with status ``PASS``."""
         return [f for f in self.feature_reports if f.status == "PASS"]
 
     @property
-    def failed_features(self):
+    def failed_features(self) -> List[FeatureReport]:
         """Feature reports with status ``FAIL``."""
         return [f for f in self.feature_reports if f.status == "FAIL"]
 
@@ -84,7 +84,7 @@ def compute_quality_metrics(
     real_data: np.ndarray,
     synthetic_data: np.ndarray,
     real_y: Optional[np.ndarray] = None,
-    feature_names: Optional[list] = None,
+    feature_names: Optional[List[str]] = None,
 ) -> QualityMetrics:
     """Compute the full quality assessment of synthetic vs real data.
 

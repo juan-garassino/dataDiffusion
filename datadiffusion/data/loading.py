@@ -1,5 +1,7 @@
 """Dataset loading functions."""
 
+from typing import Tuple, Union
+
 import numpy as np
 import torch
 from sklearn.datasets import fetch_california_housing
@@ -16,7 +18,9 @@ CALIFORNIA_FEATURE_NAMES = [
 ]
 
 
-def california_housing_dataset(scaler_type: str = "quantile"):
+def california_housing_dataset(
+    scaler_type: str = "quantile",
+) -> Tuple[TensorDataset, Union[QuantileTransformer, StandardScaler]]:
     """Load California Housing and return ``(TensorDataset, transformer)``.
 
     Downloads the dataset through scikit-learn on first use.
@@ -56,7 +60,9 @@ def california_housing_dataset(scaler_type: str = "quantile"):
     return TensorDataset(X_tensor, y_tensor), transformer
 
 
-def get_dataset(name: str, scaler_type: str = "quantile"):
+def get_dataset(
+    name: str, scaler_type: str = "quantile"
+) -> Tuple[TensorDataset, Union[QuantileTransformer, StandardScaler]]:
     """Return ``(TensorDataset, transformer)`` for the given dataset name.
 
     Raises

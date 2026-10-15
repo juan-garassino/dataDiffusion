@@ -1,5 +1,7 @@
 """Statistical fidelity metrics: KS, Wasserstein, mean/std diff, correlation."""
 
+from typing import Dict, List, Optional
+
 import numpy as np
 from scipy.stats import ks_2samp, wasserstein_distance
 
@@ -8,7 +10,9 @@ from ..tracking.logger import get_logger
 logger = get_logger("datadiffusion.evaluation")
 
 
-def compute_feature_metrics(real: np.ndarray, synthetic: np.ndarray, feature_names=None):
+def compute_feature_metrics(
+    real: np.ndarray, synthetic: np.ndarray, feature_names: Optional[List[str]] = None
+) -> List[Dict]:
     """Per-feature statistical comparison.
 
     Parameters

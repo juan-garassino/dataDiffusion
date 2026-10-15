@@ -1,7 +1,6 @@
 """Nested dataclass configuration for datadiffusion experiments."""
 
 from dataclasses import dataclass, field, asdict
-from typing import Optional
 import yaml
 
 

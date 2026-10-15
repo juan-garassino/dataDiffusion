@@ -1,11 +1,9 @@
 """Self-improvement loop: Train → Synthesise → Compare → Diagnose → Adjust → Repeat."""
 
 import os
-import copy
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List
 
-import numpy as np
 import torch
 import mlflow
 
@@ -98,7 +96,6 @@ class SelfImprovementLoop:
                 train_losses, val_losses = trainer.train(model, scheduler, dataset)
 
                 # 3. Generate
-                device = next(model.parameters()).device
                 gen_cfg = self.config.generation
                 if gen_cfg.sampler_type == "ddim" and self.config.scheduler.scheduler_type == "standard":
                     synthetic = generate_samples_ddim(

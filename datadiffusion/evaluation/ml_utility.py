@@ -1,5 +1,7 @@
 """ML utility test: train-on-synthetic, test-on-real."""
 
+from typing import Optional, Tuple
+
 import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import r2_score
@@ -10,7 +12,12 @@ from ..tracking.logger import get_logger
 logger = get_logger("datadiffusion.evaluation")
 
 
-def compute_ml_utility(real_X: np.ndarray, real_y: np.ndarray, synthetic_X: np.ndarray, synthetic_y: np.ndarray = None):
+def compute_ml_utility(
+    real_X: np.ndarray,
+    real_y: np.ndarray,
+    synthetic_X: np.ndarray,
+    synthetic_y: Optional[np.ndarray] = None,
+) -> Tuple[float, float, float]:
     """Compute ML utility ratio: R2_synthetic / R2_real.
 
     Both models are ``GradientBoostingRegressor`` instances evaluated on the

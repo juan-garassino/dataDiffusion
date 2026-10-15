@@ -92,12 +92,12 @@ def format_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold
     return "\n".join(lines)
 
 
-def print_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold: float = 0.80):
+def print_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold: float = 0.80) -> None:
     """Print the report from ``format_quality_report`` to stdout."""
     print(format_quality_report(metrics, iteration, threshold))
 
 
-def save_quality_report(metrics: QualityMetrics, save_dir: str, iteration: int = 0, threshold: float = 0.80):
+def save_quality_report(metrics: QualityMetrics, save_dir: str, iteration: int = 0, threshold: float = 0.80) -> str:
     """Write the report to ``<save_dir>/quality_report.txt`` and return that path."""
     os.makedirs(save_dir, exist_ok=True)
     report = format_quality_report(metrics, iteration, threshold)

@@ -1,5 +1,7 @@
 """Unified sample generation from a trained diffusion model."""
 
+from typing import Optional
+
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -10,7 +12,13 @@ logger = get_logger("datadiffusion.generation")
 
 
 @torch.no_grad()
-def generate_samples(model, scheduler, num_samples: int, input_size: int, num_timesteps: int = None):
+def generate_samples(
+    model: torch.nn.Module,
+    scheduler,
+    num_samples: int,
+    input_size: int,
+    num_timesteps: Optional[int] = None,
+) -> np.ndarray:
     """Generate synthetic samples via the reverse diffusion process (DDPM).
 
     Parameters
@@ -51,9 +59,9 @@ def generate_samples(model, scheduler, num_samples: int, input_size: int, num_ti
 
 @torch.no_grad()
 def generate_samples_ddim(
-    model, scheduler, num_samples: int, input_size: int,
+    model: torch.nn.Module, scheduler, num_samples: int, input_size: int,
     num_inference_steps: int = 50, eta: float = 0.0,
-):
+) -> np.ndarray:
     """Generate synthetic samples via DDIM (deterministic when eta=0).
 
     Parameters
