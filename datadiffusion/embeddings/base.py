@@ -117,7 +117,6 @@ class PositionalEmbedding(nn.Module):
         return self.layer(x).float()
 
     def __len__(self):
-        # BUG FIX #6: was `return self.size` (undefined) → use layer
         return len(self.layer)
 
 

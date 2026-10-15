@@ -1,4 +1,4 @@
-"""Score-based noise scheduler — fixes 4D reshape bug (#1)."""
+"""Score-based noise scheduler for 2-d tabular data."""
 
 import torch
 import numpy as np

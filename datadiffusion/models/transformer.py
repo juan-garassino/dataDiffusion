@@ -1,7 +1,4 @@
-"""Tabular Transformer denoising model.
-
-BUG FIX #5: forward(x, t) — same signature as MLP. No src_mask argument.
-"""
+"""Tabular Transformer denoising model with the same ``forward(x, t)`` signature as the MLP."""
 
 import torch
 import torch.nn as nn

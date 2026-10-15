@@ -58,18 +58,15 @@ class TabularMLP(nn.Module):
         self.time_embedding = create_embedding(embedding_type, hidden_size, **embedding_kwargs)
         emb_size = len(self.time_embedding)
 
-        # Project input + time embedding to hidden size
         self.input_proj = nn.Sequential(
             nn.Linear(input_size + emb_size, hidden_size),
             nn.GELU(),
         )
 
-        # Residual blocks
         self.blocks = nn.ModuleList([
             ResidualBlock(hidden_size, dropout) for _ in range(hidden_layers)
         ])
 
-        # Output projection
         self.output_proj = nn.Sequential(
             nn.LayerNorm(hidden_size),
             nn.Linear(hidden_size, input_size),

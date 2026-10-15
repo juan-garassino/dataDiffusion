@@ -1,7 +1,4 @@
-"""Trainer with validation loop, early stopping, EMA, and correct loss selection.
-
-BUG FIX #9: On NaN, zero gradients and skip the full accumulation window.
-"""
+"""Trainer with validation loop, early stopping, EMA, and loss selection by model type."""
 
 import copy
 import torch
@@ -141,7 +138,7 @@ class Trainer:
 
                 predicted = model(noisy_x, timesteps)
 
-                # BUG FIX #9: NaN check — zero grads and skip
+                # A non-finite output would poison the accumulated gradients, so drop them.
                 if torch.isnan(predicted).any() or torch.isinf(predicted).any():
                     logger.warning("NaN/Inf in model output at epoch %d batch %d — skipping", epoch + 1, batch_idx)
                     optimizer.zero_grad()

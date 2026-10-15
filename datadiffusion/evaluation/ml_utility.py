@@ -34,24 +34,21 @@ def compute_ml_utility(real_X: np.ndarray, real_y: np.ndarray, synthetic_X: np.n
         ``(r2_real, r2_synthetic, utility_ratio)``. The ratio is 0.0 when
         ``r2_real <= 0`` and is clamped at 0 from below (it is not capped at 1).
     """
-    # Split real data
     X_train, X_test, y_train, y_test = train_test_split(real_X, real_y, test_size=0.2, random_state=42)
 
-    # Train on real
     model_real = GradientBoostingRegressor(n_estimators=100, max_depth=4, random_state=42)
     model_real.fit(X_train, y_train.ravel())
     r2_real = r2_score(y_test, model_real.predict(X_test))
 
-    # Train on synthetic
     if synthetic_y is None:
-        # Generate a pseudo-target from synthetic features using the real model's predictions
+        # No real label exists for synthetic rows; label them with the real-data model.
         synthetic_y = model_real.predict(synthetic_X)
 
     model_synth = GradientBoostingRegressor(n_estimators=100, max_depth=4, random_state=42)
     model_synth.fit(synthetic_X, synthetic_y.ravel())
     r2_synthetic = r2_score(y_test, model_synth.predict(X_test))
 
-    # Avoid division by zero
+    # A non-positive R2_real makes the ratio meaningless, so report 0.
     if r2_real <= 0:
         utility_ratio = 0.0
     else:

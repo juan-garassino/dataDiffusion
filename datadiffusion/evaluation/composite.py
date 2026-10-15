@@ -106,7 +106,6 @@ def compute_quality_metrics(
         ``composite_score = 0.3 * ks_score + 0.3 * corr_score + 0.4 * ml_score``.
     """
 
-    # Convert tensors
     if isinstance(real_data, torch.Tensor):
         real_data = real_data.detach().cpu().numpy()
     if isinstance(synthetic_data, torch.Tensor):
@@ -114,17 +113,13 @@ def compute_quality_metrics(
     if isinstance(real_y, torch.Tensor):
         real_y = real_y.detach().cpu().numpy()
 
-    # Per-feature metrics
     raw_metrics = compute_feature_metrics(real_data, synthetic_data, feature_names)
     feature_reports = [FeatureReport.from_dict(m) for m in raw_metrics]
 
-    # Aggregate KS
     avg_ks = np.mean([f.ks_statistic for f in feature_reports])
 
-    # Correlation structure
     corr_diff = compute_correlation_diff(real_data, synthetic_data)
 
-    # ML utility
     if real_y is not None:
         r2_real, r2_synth, utility_ratio = compute_ml_utility(
             real_data, real_y, synthetic_data
@@ -132,14 +127,13 @@ def compute_quality_metrics(
     else:
         r2_real, r2_synth, utility_ratio = 0.0, 0.0, 0.0
 
-    # Composite score: weighted combination
-    # KS component: 1 - avg_ks (lower KS = better), clamped to [0, 1]
+    # Each component is scaled to [0, 1] with higher = better.
     ks_score = max(0.0, 1.0 - avg_ks)
-    # Correlation component: 1 - normalized corr_diff
+    # sqrt(2) * n_features is a normalising constant, not a strict maximum of the Frobenius norm; the score is clamped at 0.
     n_features = real_data.shape[1]
-    max_corr_norm = np.sqrt(2) * n_features  # theoretical max
+    max_corr_norm = np.sqrt(2) * n_features
     corr_score = max(0.0, 1.0 - corr_diff / max_corr_norm)
-    # ML utility component: already in [0, 1] (clamped)
+    # The utility ratio can exceed 1 (synthetic beats real), so cap it.
     ml_score = min(1.0, utility_ratio)
 
     composite = 0.3 * ks_score + 0.3 * corr_score + 0.4 * ml_score

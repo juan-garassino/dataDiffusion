@@ -1,9 +1,4 @@
-"""Loss functions for diffusion training.
-
-BUG FIX #2: train.py hardcoded score loss for all model types.
-BUG FIX #3: train.py referenced scheduler.sqrt_1m_alphas_cumprod — only on ScoreBasedNoiseScheduler.
-Now: get_loss_fn() selects the correct loss based on model_type.
-"""
+"""Loss functions for diffusion training; ``get_loss_fn`` selects one by model type."""
 
 import torch
 import torch.nn.functional as F
