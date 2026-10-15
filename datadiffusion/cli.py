@@ -15,6 +15,20 @@ from .config import (
 
 
 def parse_args(argv=None) -> ExperimentConfig:
+    """Parse command-line arguments into an ``ExperimentConfig``.
+
+    Parameters
+    ----------
+    argv : list of str, optional
+        Arguments to parse. Defaults to ``sys.argv[1:]``.
+
+    Returns
+    -------
+    ExperimentConfig
+        Built from the CLI flags. If ``--config`` points to an existing YAML
+        file, the config is loaded from that file and all other flags are
+        ignored. A path that does not exist is ignored silently.
+    """
     p = argparse.ArgumentParser(description="datadiffusion — tabular diffusion models")
 
     # Top-level

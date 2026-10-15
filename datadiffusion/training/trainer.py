@@ -1,9 +1,8 @@
-"""Trainer with validation loop, early stopping, EMA, and correct loss selection.
-
-BUG FIX #9: On NaN, zero gradients and skip the full accumulation window.
-"""
+"""Trainer with validation loop, early stopping, EMA, and loss selection by model type."""
 
 import copy
+from typing import List, Tuple
+
 import torch
 from torch.utils.data import DataLoader, TensorDataset, random_split
 from torch.optim.lr_scheduler import OneCycleLR
@@ -17,7 +16,15 @@ logger = get_logger("datadiffusion.training")
 
 
 class EMA:
-    """Exponential Moving Average of model parameters."""
+    """Exponential Moving Average of model parameters.
+
+    Parameters
+    ----------
+    model : torch.nn.Module
+        Model whose ``state_dict`` is tracked.
+    decay : float
+        Weight kept from the previous average on each update.
+    """
 
     def __init__(self, model, decay=0.999):
         self.decay = decay
@@ -25,6 +32,7 @@ class EMA:
 
     @torch.no_grad()
     def update(self, model):
+        """Blend the current ``model`` weights into the running average."""
         for k, v in model.state_dict().items():
             self.shadow[k].mul_(self.decay).add_(v, alpha=1 - self.decay)
 
@@ -39,6 +47,16 @@ class EMA:
 
 
 class Trainer:
+    """Trains a denoising model with AdamW, OneCycleLR, EMA and early stopping.
+
+    Uses CUDA when available, otherwise CPU.
+
+    Parameters
+    ----------
+    config : ExperimentConfig
+        Uses ``config.training`` and ``config.model.model_type``.
+    """
+
     def __init__(self, config: ExperimentConfig):
         self.config = config
         self.tc = config.training
@@ -53,7 +71,36 @@ class Trainer:
             return indices.to(device)
         return torch.randint(0, num_timesteps, (batch_size,), device=device).long()
 
-    def train(self, model, scheduler, dataset: TensorDataset):
+    def _loss_kwargs(self, predicted, noise, scheduler, timesteps) -> dict:
+        """Keyword arguments for the loss function; the score loss also needs the schedule."""
+        kwargs = dict(predicted=predicted, noise=noise)
+        if self.config.model.model_type == "score":
+            kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+            kwargs["timesteps"] = timesteps
+        return kwargs
+
+    def train(
+        self, model: torch.nn.Module, scheduler, dataset: TensorDataset
+    ) -> Tuple[List[float], List[float]]:
+        """Train ``model`` in place and return the loss history.
+
+        Parameters
+        ----------
+        model : torch.nn.Module
+            Denoiser called as ``model(noisy_x, t)``.
+        scheduler : NoiseScheduler
+            Provides ``add_noise`` and ``len(scheduler)``.
+        dataset : torch.utils.data.TensorDataset
+            ``tensors[0]`` holds the features, shape ``(N, F)``; a random
+            ``validation_split`` fraction is held out.
+
+        Returns
+        -------
+        tuple of list of float
+            ``(train_losses, val_losses)``, one value per epoch. Validation
+            uses the EMA weights. On return the model holds the EMA weights
+            from the epoch with the lowest validation loss.
+        """
         model.to(self.device)
         loss_fn = get_loss_fn(self.config.model.model_type)
 
@@ -103,18 +150,13 @@ class Trainer:
 
                 predicted = model(noisy_x, timesteps)
 
-                # BUG FIX #9: NaN check — zero grads and skip
+                # A non-finite output would poison the accumulated gradients, so drop them.
                 if torch.isnan(predicted).any() or torch.isinf(predicted).any():
                     logger.warning("NaN/Inf in model output at epoch %d batch %d — skipping", epoch + 1, batch_idx)
                     optimizer.zero_grad()
                     continue
 
-                loss_kwargs = dict(predicted=predicted, noise=noise)
-                if self.config.model.model_type == "score":
-                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
-                    loss_kwargs["timesteps"] = timesteps
-
-                loss = loss_fn(**loss_kwargs)
+                loss = loss_fn(**self._loss_kwargs(predicted, noise, scheduler, timesteps))
 
                 if torch.isnan(loss) or torch.isinf(loss):
                     logger.warning("NaN/Inf loss at epoch %d batch %d — skipping", epoch + 1, batch_idx)
@@ -148,12 +190,7 @@ class Trainer:
                     noisy_x = scheduler.add_noise(x, noise, timesteps)
                     predicted = model(noisy_x, timesteps)
 
-                    loss_kwargs = dict(predicted=predicted, noise=noise)
-                    if self.config.model.model_type == "score":
-                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
-                        loss_kwargs["timesteps"] = timesteps
-
-                    val_loss = loss_fn(**loss_kwargs)
+                    val_loss = loss_fn(**self._loss_kwargs(predicted, noise, scheduler, timesteps))
                     val_epoch_losses.append(val_loss.item())
 
             avg_val = sum(val_epoch_losses) / max(len(val_epoch_losses), 1)

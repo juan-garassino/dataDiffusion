@@ -1,11 +1,9 @@
 """Self-improvement loop: Train → Synthesise → Compare → Diagnose → Adjust → Repeat."""
 
 import os
-import copy
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List
 
-import numpy as np
 import torch
 import mlflow
 
@@ -27,6 +25,8 @@ logger = get_logger("datadiffusion.pipeline")
 
 @dataclass
 class IterationResult:
+    """Outcome of one train/generate/evaluate iteration."""
+
     iteration: int
     quality: QualityMetrics
     train_losses: List[float]
@@ -36,11 +36,14 @@ class IterationResult:
 
 @dataclass
 class LoopResult:
+    """All iteration results plus the index of the best one by composite score."""
+
     iterations: List[IterationResult] = field(default_factory=list)
     best_iteration: int = 0
 
     @property
     def quality(self) -> QualityMetrics:
+        """Quality metrics of the best iteration."""
         return self.iterations[self.best_iteration].quality
 
 
@@ -48,10 +51,19 @@ class SelfImprovementLoop:
     """Orchestrates the full train → eval → adjust loop."""
 
     def __init__(self, config: ExperimentConfig):
+        """Store ``config``; note that ``run`` mutates its training/model fields when adjusting."""
         self.config = config
         self.si = config.self_improvement
 
     def run(self) -> LoopResult:
+        """Run the loop and return the results of every iteration.
+
+        Runs a single iteration unless ``self_improvement.enabled`` is true.
+        Stops early when the composite score reaches ``quality_threshold`` or
+        changes by less than ``convergence_delta`` for 3 consecutive iterations.
+        Writes artifacts under ``experiments/<name>/<timestamp>/iter_<N>/`` and
+        logs to MLflow.
+        """
         dataset, transformer = get_dataset(
             self.config.dataset, scaler_type=self.config.data.scaler_type
         )
@@ -84,7 +96,6 @@ class SelfImprovementLoop:
                 train_losses, val_losses = trainer.train(model, scheduler, dataset)
 
                 # 3. Generate
-                device = next(model.parameters()).device
                 gen_cfg = self.config.generation
                 if gen_cfg.sampler_type == "ddim" and self.config.scheduler.scheduler_type == "standard":
                     synthetic = generate_samples_ddim(

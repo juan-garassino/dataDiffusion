@@ -8,7 +8,23 @@ _configured = False
 
 
 def setup_logging(level=logging.INFO, log_dir="logs", verbose=False):
-    """Configure the 'datadiffusion' root logger once per process."""
+    """Configure the ``datadiffusion`` logger once per process.
+
+    Parameters
+    ----------
+    level : int
+        Level for the console handler (verbose only) and, when not verbose,
+        the logger itself.
+    log_dir : str
+        Directory for the timestamped log file; created if missing.
+    verbose : bool
+        If true, set the logger to DEBUG and also log to the console.
+
+    Returns
+    -------
+    logging.Logger
+        The configured logger. Later calls return it without reconfiguring.
+    """
     global _configured
     if _configured:
         return logging.getLogger("datadiffusion")

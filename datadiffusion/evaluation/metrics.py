@@ -1,5 +1,7 @@
 """Statistical fidelity metrics: KS, Wasserstein, mean/std diff, correlation."""
 
+from typing import Dict, List, Optional
+
 import numpy as np
 from scipy.stats import ks_2samp, wasserstein_distance
 
@@ -8,10 +10,25 @@ from ..tracking.logger import get_logger
 logger = get_logger("datadiffusion.evaluation")
 
 
-def compute_feature_metrics(real: np.ndarray, synthetic: np.ndarray, feature_names=None):
+def compute_feature_metrics(
+    real: np.ndarray, synthetic: np.ndarray, feature_names: Optional[List[str]] = None
+) -> List[Dict]:
     """Per-feature statistical comparison.
 
-    Returns list of dicts, one per feature, with KS, Wasserstein, mean/std diff.
+    Parameters
+    ----------
+    real, synthetic : numpy.ndarray
+        Arrays of shape ``(n_samples, n_features)``; sample counts may differ
+        but the feature count must match.
+    feature_names : list of str, optional
+        Defaults to ``Feature_0``, ``Feature_1``, ...
+
+    Returns
+    -------
+    list of dict
+        One dict per feature with keys ``feature_index``, ``feature_name``,
+        ``ks_statistic``, ``ks_pvalue``, ``wasserstein_distance``,
+        ``mean_diff`` and ``std_diff`` (absolute differences).
     """
     n_features = real.shape[1]
     if feature_names is None:
@@ -35,7 +52,18 @@ def compute_feature_metrics(real: np.ndarray, synthetic: np.ndarray, feature_nam
 
 
 def compute_correlation_diff(real: np.ndarray, synthetic: np.ndarray) -> float:
-    """Frobenius norm of the difference between correlation matrices."""
+    """Frobenius norm of the difference between correlation matrices.
+
+    Parameters
+    ----------
+    real, synthetic : numpy.ndarray
+        Arrays of shape ``(n_samples, n_features)``.
+
+    Returns
+    -------
+    float
+        ``||corr(real) - corr(synthetic)||_F``; 0 means identical correlations.
+    """
     corr_real = np.corrcoef(real.T)
     corr_synth = np.corrcoef(synthetic.T)
     return float(np.linalg.norm(corr_real - corr_synth, "fro"))

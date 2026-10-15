@@ -7,6 +7,24 @@ from ..embeddings import create_embedding
 
 
 class ScoreNetwork(nn.Module):
+    """MLP score network with residual layers and an additive time embedding.
+
+    Parameters
+    ----------
+    input_dim : int
+        Number of features.
+    hidden_dim : int
+        Hidden width; also the time-embedding size.
+    num_layers : int
+        Number of residual layers.
+    dropout : float
+        Dropout in each layer.
+    embedding_type : str
+        Time embedding name, see ``embeddings.create_embedding``.
+    **embedding_kwargs
+        Forwarded to the embedding constructor.
+    """
+
     def __init__(
         self,
         input_dim: int,
@@ -43,6 +61,7 @@ class ScoreNetwork(nn.Module):
 
     @staticmethod
     def safe_normalize(x, dim=1, eps=1e-8):
+        """Standardise ``x`` along ``dim``; falls back to mean-centering on NaN/Inf."""
         mean = x.mean(dim=dim, keepdim=True)
         var = x.var(dim=dim, keepdim=True, unbiased=False)
         std = torch.sqrt(var + eps)
@@ -52,6 +71,7 @@ class ScoreNetwork(nn.Module):
         return normalized
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
+        """Predict the score for ``x`` of shape ``(B, input_dim)`` at timesteps ``t`` of shape ``(B,)``; returns ``(B, input_dim)``."""
         x_norm = self.safe_normalize(x)
         t_embed = self.time_embedding(t.float())
         if t_embed.dim() == 3:
@@ -64,6 +84,29 @@ class ScoreNetwork(nn.Module):
 
 
 class EnhancedScoreNetwork(nn.Module):
+    """Score network with two-linear residual blocks and optional attention.
+
+    Parameters
+    ----------
+    input_dim : int
+        Number of features.
+    hidden_dim : int
+        Hidden width; also the time-embedding size.
+    num_layers : int
+        Number of blocks.
+    dropout : float
+        Dropout inside each block.
+    embedding_type : str
+        Time embedding name, see ``embeddings.create_embedding``.
+    use_attention : bool
+        Add multi-head self-attention to each block (``False`` by default).
+        Note that ``create_model_and_scheduler`` does not enable it.
+    num_heads : int
+        Attention heads when ``use_attention`` is true.
+    **embedding_kwargs
+        Forwarded to the embedding constructor.
+    """
+
     def __init__(
         self,
         input_dim: int,
@@ -126,11 +169,13 @@ class EnhancedScoreNetwork(nn.Module):
 
     @staticmethod
     def safe_normalize(x, dim=1, eps=1e-8):
+        """Standardise ``x`` along ``dim`` (no NaN fallback, unlike ``ScoreNetwork``)."""
         mean = x.mean(dim=dim, keepdim=True)
         var = x.var(dim=dim, keepdim=True, unbiased=False)
         return (x - mean) / torch.sqrt(var + eps)
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
+        """Predict the score for ``x`` of shape ``(B, input_dim)`` at timesteps ``t`` of shape ``(B,)``; returns ``(B, input_dim)``."""
         x_norm = self.safe_normalize(x)
         x = self.input_proj(x_norm)
         t_embed = self.time_embedding(t.float())

@@ -209,7 +209,9 @@ A ratio of 0.94 means a model trained entirely on synthetic data achieves 94% of
 Weighted combination of all three metrics:
 
 ```
-composite = w_ks · (1 - avg_ks) + w_corr · max(0, 1 - corr_diff) + w_ml · ml_utility
+composite = 0.3 · max(0, 1 - avg_ks)
+          + 0.3 · max(0, 1 - corr_diff / (√2 · n_features))
+          + 0.4 · min(1, ml_utility_ratio)
 ```
 
 ## Self-Improvement Loop

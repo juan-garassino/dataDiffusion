@@ -1,5 +1,7 @@
 """Unified sample generation from a trained diffusion model."""
 
+from typing import Optional
+
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -10,10 +12,33 @@ logger = get_logger("datadiffusion.generation")
 
 
 @torch.no_grad()
-def generate_samples(model, scheduler, num_samples: int, input_size: int, num_timesteps: int = None):
+def generate_samples(
+    model: torch.nn.Module,
+    scheduler,
+    num_samples: int,
+    input_size: int,
+    num_timesteps: Optional[int] = None,
+) -> np.ndarray:
     """Generate synthetic samples via the reverse diffusion process (DDPM).
 
-    Returns numpy array of shape (num_samples, input_size).
+    Parameters
+    ----------
+    model : torch.nn.Module
+        Denoiser called as ``model(x, t)`` with float timesteps.
+    scheduler : NoiseScheduler or ScoreBasedNoiseScheduler
+        Provides ``step(model_output, t, sample)``.
+    num_samples : int
+        Number of rows to generate.
+    input_size : int
+        Number of features.
+    num_timesteps : int, optional
+        Reverse steps to run; defaults to ``scheduler.num_timesteps``.
+
+    Returns
+    -------
+    numpy.ndarray
+        Float array of shape ``(num_samples, input_size)``, in the (scaled)
+        space the model was trained on.
     """
     if num_timesteps is None:
         num_timesteps = scheduler.num_timesteps
@@ -34,12 +59,30 @@ def generate_samples(model, scheduler, num_samples: int, input_size: int, num_ti
 
 @torch.no_grad()
 def generate_samples_ddim(
-    model, scheduler, num_samples: int, input_size: int,
+    model: torch.nn.Module, scheduler, num_samples: int, input_size: int,
     num_inference_steps: int = 50, eta: float = 0.0,
-):
+) -> np.ndarray:
     """Generate synthetic samples via DDIM (deterministic when eta=0).
 
-    Returns numpy array of shape (num_samples, input_size).
+    Parameters
+    ----------
+    model : torch.nn.Module
+        Noise-prediction model called as ``model(x, t)``.
+    scheduler : NoiseScheduler
+        Must expose ``num_timesteps`` and ``alphas_cumprod``.
+    num_samples : int
+        Number of rows to generate.
+    input_size : int
+        Number of features.
+    num_inference_steps : int
+        Number of denoising steps, evenly spaced over the training timesteps.
+    eta : float
+        Stochasticity; 0 is deterministic given the initial noise.
+
+    Returns
+    -------
+    numpy.ndarray
+        Float array of shape ``(num_samples, input_size)``.
     """
     device = next(model.parameters()).device
     model.eval()

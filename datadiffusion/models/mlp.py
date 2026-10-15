@@ -7,6 +7,8 @@ from ..embeddings import create_embedding
 
 
 class ResidualBlock(nn.Module):
+    """Pre-norm residual block: ``x + MLP(LayerNorm(x))`` for ``(B, size)`` input."""
+
     def __init__(self, size, dropout=0.1):
         super().__init__()
         self.block = nn.Sequential(
@@ -24,6 +26,24 @@ class ResidualBlock(nn.Module):
 
 
 class TabularMLP(nn.Module):
+    """Residual MLP that predicts noise from a noisy row and its timestep.
+
+    Parameters
+    ----------
+    input_size : int
+        Number of features.
+    hidden_size : int
+        Width of the residual blocks; also the time-embedding size.
+    hidden_layers : int
+        Number of residual blocks.
+    dropout : float
+        Dropout inside each block.
+    embedding_type : str
+        Time embedding name, see ``embeddings.create_embedding``.
+    **embedding_kwargs
+        Forwarded to the embedding constructor.
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -38,24 +58,35 @@ class TabularMLP(nn.Module):
         self.time_embedding = create_embedding(embedding_type, hidden_size, **embedding_kwargs)
         emb_size = len(self.time_embedding)
 
-        # Project input + time embedding to hidden size
         self.input_proj = nn.Sequential(
             nn.Linear(input_size + emb_size, hidden_size),
             nn.GELU(),
         )
 
-        # Residual blocks
         self.blocks = nn.ModuleList([
             ResidualBlock(hidden_size, dropout) for _ in range(hidden_layers)
         ])
 
-        # Output projection
         self.output_proj = nn.Sequential(
             nn.LayerNorm(hidden_size),
             nn.Linear(hidden_size, input_size),
         )
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
+        """Predict noise.
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Noisy features, float, shape ``(B, input_size)``.
+        t : torch.Tensor
+            Timesteps, shape ``(B,)``.
+
+        Returns
+        -------
+        torch.Tensor
+            Shape ``(B, input_size)``.
+        """
         t_emb = self.time_embedding(t.unsqueeze(-1).float())
         if t_emb.dim() == 3:
             t_emb = t_emb.squeeze(1)

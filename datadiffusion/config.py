@@ -1,17 +1,20 @@
 """Nested dataclass configuration for datadiffusion experiments."""
 
 from dataclasses import dataclass, field, asdict
-from typing import Optional
 import yaml
 
 
 @dataclass
 class DataConfig:
+    """Dataset preprocessing options."""
+
     scaler_type: str = "quantile"  # quantile | standard
 
 
 @dataclass
 class ModelConfig:
+    """Denoising network options (see ``models.factory.create_model_and_scheduler``)."""
+
     model_type: str = "mlp"  # mlp | transformer | score
     hidden_size: int = 256
     num_layers: int = 4
@@ -23,6 +26,8 @@ class ModelConfig:
 
 @dataclass
 class SchedulerConfig:
+    """Noise scheduler options (``beta_*`` define the noise schedule)."""
+
     scheduler_type: str = "standard"  # standard | score
     num_timesteps: int = 1000
     beta_start: float = 0.0001
@@ -32,6 +37,8 @@ class SchedulerConfig:
 
 @dataclass
 class TrainingConfig:
+    """Optimisation options used by ``training.trainer.Trainer``."""
+
     num_epochs: int = 200
     learning_rate: float = 3e-4
     batch_size: int = 64
@@ -43,6 +50,8 @@ class TrainingConfig:
 
 @dataclass
 class GenerationConfig:
+    """Sampling options. ``ddim_steps`` only applies when ``sampler_type == "ddim"``."""
+
     num_samples: int = 1000
     sampler_type: str = "ddpm"  # ddpm | ddim
     ddim_steps: int = 50
@@ -50,6 +59,13 @@ class GenerationConfig:
 
 @dataclass
 class SelfImprovementConfig:
+    """Settings for the iterative train/evaluate/adjust loop.
+
+    ``convergence_delta`` is the minimum composite-score change between
+    iterations; the other ``*_factor`` fields are the multipliers applied
+    by ``SelfImprovementLoop._adjust_config``.
+    """
+
     enabled: bool = False
     max_iterations: int = 10
     quality_threshold: float = 0.80
@@ -61,6 +77,8 @@ class SelfImprovementConfig:
 
 @dataclass
 class ExperimentConfig:
+    """Top-level experiment configuration composed of the section configs above."""
+
     experiment_name: str = "california_housing_diffusion"
     dataset: str = "california"
     verbose: bool = False
@@ -72,10 +90,16 @@ class ExperimentConfig:
     self_improvement: SelfImprovementConfig = field(default_factory=SelfImprovementConfig)
 
     def to_dict(self) -> dict:
+        """Return the configuration as a nested ``dict`` of plain Python values."""
         return asdict(self)
 
     @classmethod
     def from_yaml(cls, path: str) -> "ExperimentConfig":
+        """Load a config from a YAML file.
+
+        Missing keys fall back to the dataclass defaults. Unknown keys inside
+        a section raise ``TypeError``.
+        """
         with open(path) as f:
             data = yaml.safe_load(f)
         return cls(

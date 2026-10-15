@@ -8,6 +8,27 @@ from .score import EnhancedScoreNetwork
 
 
 def create_model_and_scheduler(config: ExperimentConfig, input_size: int):
+    """Build the denoising model and noise scheduler named in ``config``.
+
+    Parameters
+    ----------
+    config : ExperimentConfig
+        Uses ``config.model.model_type`` (``mlp``, ``transformer``, ``score``)
+        and ``config.scheduler.scheduler_type`` (``standard``, ``score``).
+    input_size : int
+        Number of feature columns the model denoises.
+
+    Returns
+    -------
+    tuple
+        ``(model, scheduler)``: an ``nn.Module`` and a ``NoiseScheduler`` (or
+        ``ScoreBasedNoiseScheduler``).
+
+    Raises
+    ------
+    ValueError
+        For an unknown model or scheduler type.
+    """
     mc = config.model
     sc = config.scheduler
 
