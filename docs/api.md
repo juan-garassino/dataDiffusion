@@ -324,7 +324,7 @@ plot_correlation_comparison(real_X, synthetic_X, save_path="correlations.png")
 outdir = setup_experiment("my_experiment")  # Sets MLflow experiment, returns output dir
 
 with nested_run("iter_0"):
-    mlflow.log_metrics({"composite": 0.92})
+    mlflow.log_metrics({"composite_score": quality.composite_score})
     mlflow.log_artifact("plot.png")
 ```
 
