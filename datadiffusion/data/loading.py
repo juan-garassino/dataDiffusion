@@ -17,10 +17,24 @@ CALIFORNIA_FEATURE_NAMES = [
 
 
 def california_housing_dataset(scaler_type: str = "quantile"):
-    """Load California Housing and return (TensorDataset, transformer).
+    """Load California Housing and return ``(TensorDataset, transformer)``.
 
-    The transformer can be used to inverse-transform generated samples
-    back to the original feature space.
+    Downloads the dataset through scikit-learn on first use.
+
+    Parameters
+    ----------
+    scaler_type : {"quantile", "standard"}
+        ``"quantile"`` maps each feature to a normal distribution with a
+        ``QuantileTransformer``; any other value uses ``StandardScaler``.
+
+    Returns
+    -------
+    dataset : torch.utils.data.TensorDataset
+        ``tensors[0]``: scaled features, float32, shape ``(20640, 8)``;
+        ``tensors[1]``: target (median house value), float32, shape ``(20640, 1)``.
+    transformer : QuantileTransformer or StandardScaler
+        Fitted scaler; use ``inverse_transform`` to map generated samples back
+        to the original feature space.
     """
     logger.info("Loading California Housing dataset")
     california = fetch_california_housing()
@@ -43,7 +57,13 @@ def california_housing_dataset(scaler_type: str = "quantile"):
 
 
 def get_dataset(name: str, scaler_type: str = "quantile"):
-    """Return (TensorDataset, transformer) for the given dataset name."""
+    """Return ``(TensorDataset, transformer)`` for the given dataset name.
+
+    Raises
+    ------
+    ValueError
+        If ``name`` is not ``"california"`` (the only implemented dataset).
+    """
     if name == "california":
         return california_housing_dataset(scaler_type=scaler_type)
     raise ValueError(f"Unknown dataset: {name}")

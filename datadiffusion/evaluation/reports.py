@@ -17,6 +17,17 @@ def _section_status(value: float, good: float, bad: float) -> str:
 
 
 def format_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold: float = 0.80) -> str:
+    """Render ``metrics`` as a boxed multi-line text report.
+
+    Parameters
+    ----------
+    metrics : QualityMetrics
+        Result of ``compute_quality_metrics``.
+    iteration : int
+        Iteration number shown in the title.
+    threshold : float
+        Composite score at or above which the status reads PASSED.
+    """
     w = 62
     lines = []
     a = lines.append
@@ -82,10 +93,12 @@ def format_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold
 
 
 def print_quality_report(metrics: QualityMetrics, iteration: int = 0, threshold: float = 0.80):
+    """Print the report from ``format_quality_report`` to stdout."""
     print(format_quality_report(metrics, iteration, threshold))
 
 
 def save_quality_report(metrics: QualityMetrics, save_dir: str, iteration: int = 0, threshold: float = 0.80):
+    """Write the report to ``<save_dir>/quality_report.txt`` and return that path."""
     os.makedirs(save_dir, exist_ok=True)
     report = format_quality_report(metrics, iteration, threshold)
     path = os.path.join(save_dir, "quality_report.txt")

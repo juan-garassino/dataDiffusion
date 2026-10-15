@@ -5,6 +5,17 @@ import matplotlib.pyplot as plt
 
 
 def plot_loss_curve(train_losses, val_losses=None, save_path=None):
+    """Plot per-epoch training (and optionally validation) loss.
+
+    Parameters
+    ----------
+    train_losses : sequence of float
+        One value per epoch.
+    val_losses : sequence of float, optional
+        One value per epoch; omitted from the plot when empty or ``None``.
+    save_path : str, optional
+        If given, the figure is saved there (parent directories are created).
+    """
     plt.figure(figsize=(10, 5))
     plt.plot(train_losses, label="Train")
     if val_losses:

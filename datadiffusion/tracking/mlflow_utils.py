@@ -12,6 +12,14 @@ logger = get_logger("datadiffusion.tracking")
 
 
 def setup_experiment(experiment_name: str) -> str:
+    """Start an MLflow run and create the output directory.
+
+    Returns
+    -------
+    str
+        ``experiments/<experiment_name>/<timestamp>``, relative to the current
+        directory. The caller is responsible for ``mlflow.end_run()``.
+    """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     outdir = os.path.join("experiments", experiment_name, timestamp)
     os.makedirs(outdir, exist_ok=True)

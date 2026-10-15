@@ -13,10 +13,26 @@ logger = get_logger("datadiffusion.evaluation")
 def compute_ml_utility(real_X: np.ndarray, real_y: np.ndarray, synthetic_X: np.ndarray, synthetic_y: np.ndarray = None):
     """Compute ML utility ratio: R2_synthetic / R2_real.
 
-    If synthetic_y is not provided, uses first column of synthetic_X as target
-    (same convention as real_y).
+    Both models are ``GradientBoostingRegressor`` instances evaluated on the
+    same 20% held-out slice of the real data.
 
-    Returns (r2_real, r2_synthetic, utility_ratio).
+    Parameters
+    ----------
+    real_X : numpy.ndarray
+        Real features, shape ``(n_real, n_features)``.
+    real_y : numpy.ndarray
+        Real target, shape ``(n_real, 1)`` or ``(n_real,)``.
+    synthetic_X : numpy.ndarray
+        Synthetic features, shape ``(n_synth, n_features)``.
+    synthetic_y : numpy.ndarray, optional
+        Synthetic target, shape ``(n_synth,)`` or ``(n_synth, 1)``. If omitted,
+        the synthetic target is the prediction of the model trained on real data.
+
+    Returns
+    -------
+    tuple of float
+        ``(r2_real, r2_synthetic, utility_ratio)``. The ratio is 0.0 when
+        ``r2_real <= 0`` and is clamped at 0 from below (it is not capped at 1).
     """
     # Split real data
     X_train, X_test, y_train, y_test = train_test_split(real_X, real_y, test_size=0.2, random_state=42)

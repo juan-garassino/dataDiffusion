@@ -17,7 +17,15 @@ logger = get_logger("datadiffusion.training")
 
 
 class EMA:
-    """Exponential Moving Average of model parameters."""
+    """Exponential Moving Average of model parameters.
+
+    Parameters
+    ----------
+    model : torch.nn.Module
+        Model whose ``state_dict`` is tracked.
+    decay : float
+        Weight kept from the previous average on each update.
+    """
 
     def __init__(self, model, decay=0.999):
         self.decay = decay
@@ -25,6 +33,7 @@ class EMA:
 
     @torch.no_grad()
     def update(self, model):
+        """Blend the current ``model`` weights into the running average."""
         for k, v in model.state_dict().items():
             self.shadow[k].mul_(self.decay).add_(v, alpha=1 - self.decay)
 
@@ -39,6 +48,16 @@ class EMA:
 
 
 class Trainer:
+    """Trains a denoising model with AdamW, OneCycleLR, EMA and early stopping.
+
+    Uses CUDA when available, otherwise CPU.
+
+    Parameters
+    ----------
+    config : ExperimentConfig
+        Uses ``config.training`` and ``config.model.model_type``.
+    """
+
     def __init__(self, config: ExperimentConfig):
         self.config = config
         self.tc = config.training
@@ -54,6 +73,25 @@ class Trainer:
         return torch.randint(0, num_timesteps, (batch_size,), device=device).long()
 
     def train(self, model, scheduler, dataset: TensorDataset):
+        """Train ``model`` in place and return the loss history.
+
+        Parameters
+        ----------
+        model : torch.nn.Module
+            Denoiser called as ``model(noisy_x, t)``.
+        scheduler : NoiseScheduler
+            Provides ``add_noise`` and ``len(scheduler)``.
+        dataset : torch.utils.data.TensorDataset
+            ``tensors[0]`` holds the features, shape ``(N, F)``; a random
+            ``validation_split`` fraction is held out.
+
+        Returns
+        -------
+        tuple of list of float
+            ``(train_losses, val_losses)``, one value per epoch. Validation
+            uses the EMA weights. On return the model holds the EMA weights
+            from the epoch with the lowest validation loss.
+        """
         model.to(self.device)
         loss_fn = get_loss_fn(self.config.model.model_type)
 

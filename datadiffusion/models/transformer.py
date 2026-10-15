@@ -10,6 +10,30 @@ from ..embeddings import create_embedding
 
 
 class TabularTransformer(nn.Module):
+    """Two-token transformer encoder for noise prediction.
+
+    The feature row (projected to ``hidden_size``) and the time embedding form
+    a sequence of length 2; the output at the time token is projected back to
+    ``input_size``.
+
+    Parameters
+    ----------
+    input_size : int
+        Number of features.
+    hidden_size : int
+        Model width (must be divisible by ``num_heads``).
+    num_layers : int
+        Number of encoder layers.
+    num_heads : int
+        Attention heads per layer.
+    dropout : float
+        Dropout inside the encoder layers.
+    embedding_type : str
+        Time embedding name, see ``embeddings.create_embedding``.
+    **embedding_kwargs
+        Forwarded to the embedding constructor.
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -34,7 +58,7 @@ class TabularTransformer(nn.Module):
         self.output_layer = nn.Linear(hidden_size, input_size)
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
-        # x: (B, input_size), t: (B,)
+        """Predict noise for ``x`` of shape ``(B, input_size)`` at timesteps ``t`` of shape ``(B,)``."""
         x = self.embedding(x).unsqueeze(1)           # (B, 1, H)
         t_emb = self.time_embedding(t)                 # may be (B, H) or (B, 1, H)
         if t_emb.dim() == 3:

@@ -7,7 +7,17 @@ import seaborn as sns
 
 
 def plot_marginal_distributions(real, synthetic, feature_names=None, save_path=None):
-    """Side-by-side histograms per feature."""
+    """Overlaid real vs synthetic histograms, one panel per feature (4 per row).
+
+    Parameters
+    ----------
+    real, synthetic : numpy.ndarray
+        Arrays of shape ``(n_samples, n_features)``.
+    feature_names : list of str, optional
+        Panel titles; defaults to ``Feature <i>``.
+    save_path : str, optional
+        If given, the figure is saved there (parent directories are created).
+    """
     n_features = real.shape[1]
     if feature_names is None:
         feature_names = [f"Feature {i}" for i in range(n_features)]
@@ -37,7 +47,12 @@ def plot_marginal_distributions(real, synthetic, feature_names=None, save_path=N
 def plot_correlation_comparison(real, synthetic, save_path=None):
     """Real vs synthetic correlation heatmaps side by side.
 
-    BUG FIX #10: accepts save_path parameter instead of hardcoding to project root.
+    Parameters
+    ----------
+    real, synthetic : numpy.ndarray
+        Arrays of shape ``(n_samples, n_features)``.
+    save_path : str, optional
+        If given, the figure is saved there (parent directories are created).
     """
     corr_real = np.corrcoef(real.T)
     corr_synth = np.corrcoef(synthetic.T)

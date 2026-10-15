@@ -7,6 +7,23 @@ import matplotlib.animation as animation
 
 
 def create_animation(samples_list, process_name, max_samples=100, save_dir=None):
+    """Animate a pairwise feature plot over the diffusion steps.
+
+    Parameters
+    ----------
+    samples_list : list of numpy.ndarray
+        One array of shape ``(n_samples, n_features)`` per step.
+    process_name : str
+        Used in the figure title and the output file name.
+    max_samples : int
+        Only the first ``max_samples`` rows of each step are drawn.
+    save_dir : str, optional
+        If given, saves ``<process_name>_animation.mp4`` there (requires ``ffmpeg``).
+
+    Returns
+    -------
+    matplotlib.animation.FuncAnimation
+    """
     num_features = samples_list[0].shape[1]
     num_timesteps = len(samples_list) - 1
 

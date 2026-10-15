@@ -15,6 +15,12 @@ logger = get_logger("datadiffusion.evaluation")
 
 @dataclass
 class FeatureReport:
+    """Per-feature fidelity statistics and a PASS/WARN/FAIL status.
+
+    Status is derived from ``ks_statistic``: PASS below 0.15, WARN below 0.30,
+    otherwise FAIL.
+    """
+
     feature_index: int
     feature_name: str
     ks_statistic: float
@@ -26,6 +32,7 @@ class FeatureReport:
 
     @classmethod
     def from_dict(cls, d: dict) -> "FeatureReport":
+        """Build a report from one dict returned by ``compute_feature_metrics``."""
         ks = d["ks_statistic"]
         p = d["ks_pvalue"]
         if ks < 0.15:
@@ -48,6 +55,12 @@ class FeatureReport:
 
 @dataclass
 class QualityMetrics:
+    """Aggregate quality of synthetic data relative to real data.
+
+    ``composite_score`` is in [0, 1]; higher is better. ``r2_real`` and
+    ``r2_synthetic`` are 0.0 when no target was supplied.
+    """
+
     feature_reports: List[FeatureReport]
     avg_ks_statistic: float
     corr_diff_norm: float
@@ -58,10 +71,12 @@ class QualityMetrics:
 
     @property
     def passed_features(self):
+        """Feature reports with status ``PASS``."""
         return [f for f in self.feature_reports if f.status == "PASS"]
 
     @property
     def failed_features(self):
+        """Feature reports with status ``FAIL``."""
         return [f for f in self.feature_reports if f.status == "FAIL"]
 
 
@@ -71,7 +86,25 @@ def compute_quality_metrics(
     real_y: Optional[np.ndarray] = None,
     feature_names: Optional[list] = None,
 ) -> QualityMetrics:
-    """Compute the full quality assessment of synthetic vs real data."""
+    """Compute the full quality assessment of synthetic vs real data.
+
+    Parameters
+    ----------
+    real_data : numpy.ndarray or torch.Tensor
+        Real features, shape ``(n_real, n_features)``.
+    synthetic_data : numpy.ndarray or torch.Tensor
+        Synthetic features, shape ``(n_synth, n_features)``.
+    real_y : numpy.ndarray or torch.Tensor, optional
+        Real target, shape ``(n_real, 1)`` or ``(n_real,)``. If omitted the ML
+        utility term is 0.
+    feature_names : list of str, optional
+        Names used in the per-feature reports.
+
+    Returns
+    -------
+    QualityMetrics
+        ``composite_score = 0.3 * ks_score + 0.3 * corr_score + 0.4 * ml_score``.
+    """
 
     # Convert tensors
     if isinstance(real_data, torch.Tensor):

@@ -12,7 +12,22 @@ logger = get_logger("datadiffusion.schedulers")
 class NoiseScheduler:
     """DDPM noise scheduler.
 
-    BUG FIX #8: removed mlflow.log_params from __init__ — no side effect.
+    Precomputes the beta schedule and derived terms as 1-d float32 tensors of
+    length ``num_timesteps``.
+
+    Parameters
+    ----------
+    num_timesteps : int
+        Number of diffusion steps ``T``.
+    beta_start, beta_end : float
+        Endpoints for the ``linear`` and ``quadratic`` schedules (unused by ``cosine``).
+    beta_schedule : {"linear", "quadratic", "cosine"}
+        Noise schedule.
+
+    Raises
+    ------
+    ValueError
+        For an unknown ``beta_schedule``.
     """
 
     def __init__(
@@ -65,16 +80,19 @@ class NoiseScheduler:
         logger.info("NoiseScheduler initialised: %d timesteps", num_timesteps)
 
     def reconstruct_x0(self, x_t, t, noise):
+        """Estimate the clean sample from ``x_t`` of shape ``(B, F)``, integer timesteps ``t`` of shape ``(B,)`` and predicted ``noise`` of shape ``(B, F)``."""
         s1 = self.sqrt_inv_alphas_cumprod[t].view(-1, 1)
         s2 = self.sqrt_inv_alphas_cumprod_minus_one[t].view(-1, 1)
         return s1 * x_t - s2 * noise
 
     def q_posterior(self, x_0, x_t, t):
+        """Mean of ``q(x_{t-1} | x_t, x_0)``; shapes as in ``reconstruct_x0``."""
         s1 = self.posterior_mean_coef1[t].view(-1, 1)
         s2 = self.posterior_mean_coef2[t].view(-1, 1)
         return s1 * x_0 + s2 * x_t
 
     def get_variance(self, t):
+        """Posterior variance at integer timestep ``t`` (0 at ``t == 0``, otherwise clamped to >= 1e-20)."""
         if t == 0:
             return 0
         variance = (
@@ -83,6 +101,22 @@ class NoiseScheduler:
         return variance.clamp(min=1e-20)
 
     def step(self, model_output, timestep, sample):
+        """One DDPM reverse step.
+
+        Parameters
+        ----------
+        model_output : torch.Tensor
+            Predicted noise, shape ``(B, F)``.
+        timestep : int
+            Current step ``t`` (a single value for the whole batch).
+        sample : torch.Tensor
+            Current ``x_t``, shape ``(B, F)``.
+
+        Returns
+        -------
+        torch.Tensor
+            ``x_{t-1}``, shape ``(B, F)``.
+        """
         t = timestep
         pred_original_sample = self.reconstruct_x0(sample, t, model_output)
         pred_prev_sample = self.q_posterior(pred_original_sample, sample, t)
@@ -95,9 +129,15 @@ class NoiseScheduler:
         return pred_prev_sample + variance
 
     def add_noise(self, x_start, x_noise, timesteps):
+        """Forward process: ``sqrt(a_bar_t) * x_start + sqrt(1 - a_bar_t) * x_noise``.
+
+        ``x_start`` and ``x_noise`` have shape ``(B, F)``; ``timesteps`` is a
+        long tensor of shape ``(B,)``.
+        """
         s1 = self.sqrt_alphas_cumprod[timesteps].view(-1, 1)
         s2 = self.sqrt_one_minus_alphas_cumprod[timesteps].view(-1, 1)
         return s1 * x_start + s2 * x_noise
 
     def __len__(self):
+        """Number of diffusion timesteps."""
         return self.num_timesteps
