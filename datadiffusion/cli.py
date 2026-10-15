@@ -19,7 +19,7 @@ def parse_args(argv=None) -> ExperimentConfig:
 
     # Top-level
     p.add_argument("--experiment_name", default="california_housing_diffusion")
-    p.add_argument("--dataset", default="california", choices=["california", "moons", "line", "circle"])
+    p.add_argument("--dataset", default="california", choices=["california"])
     p.add_argument("--verbose", action="store_true")
     p.add_argument("--config", type=str, default=None, help="Path to YAML config file")
 
@@ -64,7 +64,9 @@ def parse_args(argv=None) -> ExperimentConfig:
 
     args = p.parse_args(argv)
 
-    if args.config and os.path.exists(args.config):
+    if args.config:
+        if not os.path.exists(args.config):
+            p.error(f"config file not found: {args.config}")
         return ExperimentConfig.from_yaml(args.config)
 
     return ExperimentConfig(

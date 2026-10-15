@@ -68,3 +68,13 @@ def test_uniform_sampling_without_importance():
     samples = trainer._sample_timesteps(10000, 1000, torch.device("cpu"))
     median = samples.float().median().item()
     assert 400 < median < 600, f"Median {median} should be near 500 for uniform sampling"
+
+
+def test_score_model_with_standard_scheduler_no_crash(dummy_8d_data, small_score_config):
+    """--model_type score with the default --scheduler_type standard used to raise
+    AttributeError (sqrt_1m_alphas_cumprod only exists on ScoreBasedNoiseScheduler)."""
+    small_score_config.scheduler.scheduler_type = "standard"
+    model, scheduler = create_model_and_scheduler(small_score_config, input_size=8)
+    trainer = Trainer(small_score_config)
+    train_losses, _ = trainer.train(model, scheduler, dummy_8d_data)
+    assert len(train_losses) > 0

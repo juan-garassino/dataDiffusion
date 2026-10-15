@@ -84,7 +84,6 @@ class SelfImprovementLoop:
                 train_losses, val_losses = trainer.train(model, scheduler, dataset)
 
                 # 3. Generate
-                device = next(model.parameters()).device
                 gen_cfg = self.config.generation
                 if gen_cfg.sampler_type == "ddim" and self.config.scheduler.scheduler_type == "standard":
                     synthetic = generate_samples_ddim(

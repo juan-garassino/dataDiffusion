@@ -111,7 +111,7 @@ class Trainer:
 
                 loss_kwargs = dict(predicted=predicted, noise=noise)
                 if self.config.model.model_type == "score":
-                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_one_minus_alphas_cumprod
                     loss_kwargs["timesteps"] = timesteps
 
                 loss = loss_fn(**loss_kwargs)
@@ -150,7 +150,7 @@ class Trainer:
 
                     loss_kwargs = dict(predicted=predicted, noise=noise)
                     if self.config.model.model_type == "score":
-                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_one_minus_alphas_cumprod
                         loss_kwargs["timesteps"] = timesteps
 
                     val_loss = loss_fn(**loss_kwargs)

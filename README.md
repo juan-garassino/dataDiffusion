@@ -45,7 +45,7 @@ python main.py [OPTIONS]
 | Argument | Default | Description |
 |---|---|---|
 | `--experiment_name` | `california_housing_diffusion` | Name for experiment tracking |
-| `--dataset` | `california` | Dataset to use (`california`, `moons`, `line`, `circle`) |
+| `--dataset` | `california` | Dataset to use (only `california` is implemented) |
 | `--verbose` | `False` | Enable verbose logging |
 | `--config` | `None` | Path to YAML config file (overrides CLI args) |
 
