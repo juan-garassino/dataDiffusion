@@ -8,7 +8,7 @@ Tabular data synthesis using denoising diffusion probabilistic models (DDPM/DDIM
 pip install -r requirements.txt
 
 # Train, generate and evaluate on California Housing (short run)
-python main.py --num_epochs 2 --num_timesteps 50 --sampler_type ddim --ddim_steps 10
+MLFLOW_ALLOW_FILE_STORE=true python main.py --num_epochs 2 --num_timesteps 50 --sampler_type ddim --ddim_steps 10
 
 # Run tests
 python -m pytest tests/ -q
@@ -17,6 +17,7 @@ python -m pytest tests/ -q
 Notes:
 
 - The first run downloads California Housing through `sklearn.datasets.fetch_california_housing`, so it needs network access. Without it, 5 of the 41 tests (the ones that load this dataset) fail with a download error; the other 36 pass.
+- MLflow 3.17 (the version resolved on 2026-10-15) refuses to use a file-based `./mlruns` store that already exists, and this repo ships one. If `python main.py` fails with "The filesystem tracking backend ... is in maintenance mode", run it with `MLFLOW_ALLOW_FILE_STORE=true`, e.g. `MLFLOW_ALLOW_FILE_STORE=true python main.py ...`. The 2 pipeline tests hit the same error from the repo root. The same applies to `make train-quick` and the other `make` targets that call `main.py`.
 - Each run writes to `experiments/<experiment_name>/<timestamp>/iter_0/`, `mlruns/` and `logs/` under the current directory (all three are git-ignored).
 - Checked with Python 3.11 and the unpinned versions that `pip install -r requirements.txt` resolved on 2026-10-15. `requirements.txt` does not pin versions and the repo declares no minimum Python version.
 
