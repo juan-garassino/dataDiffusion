@@ -45,7 +45,7 @@ python main.py [OPTIONS]
 | Argument | Default | Description |
 |---|---|---|
 | `--experiment_name` | `california_housing_diffusion` | Name for experiment tracking |
-| `--dataset` | `california` | Dataset to use (`california`, `moons`, `line`, `circle`) |
+| `--dataset` | `california` | Dataset to use (only `california` is implemented) |
 | `--verbose` | `False` | Enable verbose logging |
 | `--config` | `None` | Path to YAML config file (overrides CLI args) |
 
@@ -118,8 +118,8 @@ python main.py --self_improve --max_iterations 5 --quality_threshold 0.90
 # Use standard scaler instead of quantile
 python main.py --scaler_type standard
 
-# Transformer architecture with score-based scheduler
-python main.py --model_type transformer --scheduler_type score
+# Score network with its matching score-based (SDE) scheduler
+python main.py --model_type score --scheduler_type score
 
 # YAML config
 python main.py --config experiments/my_config.yaml

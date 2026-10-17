@@ -1,5 +1,6 @@
 """Tests for DDIM sampler."""
 
+import pytest
 import torch
 import numpy as np
 
@@ -35,3 +36,11 @@ def test_ddim_deterministic():
     out2 = generate_samples_ddim(model, scheduler, num_samples=8, input_size=4, num_inference_steps=10, eta=0.0)
 
     np.testing.assert_allclose(out1, out2, atol=1e-5)
+
+
+@pytest.mark.parametrize("steps", [0, -1, 101])
+def test_ddim_rejects_invalid_num_inference_steps(steps):
+    """num_inference_steps outside [1, num_timesteps] would make every step t=0 or divide by zero (G-009)."""
+    model, scheduler = _make_model_and_scheduler()
+    with pytest.raises(ValueError, match="num_inference_steps"):
+        generate_samples_ddim(model, scheduler, num_samples=4, input_size=4, num_inference_steps=steps)

@@ -4,6 +4,7 @@ BUG FIX #9: On NaN, zero gradients and skip the full accumulation window.
 """
 
 import copy
+import math
 import torch
 from torch.utils.data import DataLoader, TensorDataset, random_split
 from torch.optim.lr_scheduler import OneCycleLR
@@ -70,7 +71,8 @@ class Trainer:
             optimizer,
             max_lr=self.tc.learning_rate,
             epochs=self.tc.num_epochs,
-            steps_per_epoch=len(train_loader),
+            # The optimizer steps once per accumulation window (see the loop below).
+            steps_per_epoch=math.ceil(len(train_loader) / self.tc.accumulation_steps),
             pct_start=0.3,
             anneal_strategy="cos",
             div_factor=10.0,
@@ -111,7 +113,7 @@ class Trainer:
 
                 loss_kwargs = dict(predicted=predicted, noise=noise)
                 if self.config.model.model_type == "score":
-                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+                    loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_one_minus_alphas_cumprod
                     loss_kwargs["timesteps"] = timesteps
 
                 loss = loss_fn(**loss_kwargs)
@@ -150,7 +152,7 @@ class Trainer:
 
                     loss_kwargs = dict(predicted=predicted, noise=noise)
                     if self.config.model.model_type == "score":
-                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_1m_alphas_cumprod
+                        loss_kwargs["sqrt_1m_alpha"] = scheduler.sqrt_one_minus_alphas_cumprod
                         loss_kwargs["timesteps"] = timesteps
 
                     val_loss = loss_fn(**loss_kwargs)

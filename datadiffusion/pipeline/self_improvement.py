@@ -1,5 +1,6 @@
 """Self-improvement loop: Train → Synthesise → Compare → Diagnose → Adjust → Repeat."""
 
+import math
 import os
 import copy
 from dataclasses import dataclass, field
@@ -84,7 +85,6 @@ class SelfImprovementLoop:
                 train_losses, val_losses = trainer.train(model, scheduler, dataset)
 
                 # 3. Generate
-                device = next(model.parameters()).device
                 gen_cfg = self.config.generation
                 if gen_cfg.sampler_type == "ddim" and self.config.scheduler.scheduler_type == "standard":
                     synthetic = generate_samples_ddim(
@@ -187,16 +187,21 @@ class SelfImprovementLoop:
             tc.learning_rate *= si.lr_decay_factor
             logger.info("Adjusting: epochs→%d, lr→%.2e (high KS)", tc.num_epochs, tc.learning_rate)
 
+        def _grow(h: int) -> int:
+            # Round up to a multiple of num_heads (attention) and 2 (sinusoidal embedding).
+            step = math.lcm(max(mc.num_heads, 1), 2)
+            return -(-int(h * si.capacity_increase_factor) // step) * step
+
         # Bad correlation → more capacity
         if quality.corr_diff_norm > 0.5:
-            mc.hidden_size = int(mc.hidden_size * si.capacity_increase_factor)
+            mc.hidden_size = _grow(mc.hidden_size)
             mc.num_layers = mc.num_layers + 1
             logger.info("Adjusting: hidden_size→%d, num_layers→%d (high corr diff)", mc.hidden_size, mc.num_layers)
 
         # Bad ML utility → both
         if quality.ml_utility_ratio < 0.5:
             tc.num_epochs = int(tc.num_epochs * si.epoch_increase_factor)
-            mc.hidden_size = int(mc.hidden_size * si.capacity_increase_factor)
+            mc.hidden_size = _grow(mc.hidden_size)
             logger.info("Adjusting: epochs→%d, hidden_size→%d (low ML utility)", tc.num_epochs, mc.hidden_size)
 
     def _print_summary(self, result: LoopResult):

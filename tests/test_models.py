@@ -41,3 +41,26 @@ def test_enhanced_score_network_forward():
     t = torch.randint(0, 100, (16,))
     out = model(x, t)
     assert out.shape == (16, 8)
+
+
+@pytest.mark.parametrize("model_type,scheduler_type,warns", [
+    ("score", "standard", True),
+    ("transformer", "score", True),
+    ("mlp", "score", True),
+    ("score", "score", False),
+    ("mlp", "standard", False),
+])
+def test_factory_warns_on_mismatched_model_scheduler(caplog, model_type, scheduler_type, warns):
+    """Score models output a score, the other models output noise; the sampler step must match (G-010)."""
+    import logging
+
+    from datadiffusion.config import ExperimentConfig, ModelConfig, SchedulerConfig
+    from datadiffusion.models.factory import create_model_and_scheduler
+
+    config = ExperimentConfig(
+        model=ModelConfig(model_type=model_type, hidden_size=32, num_layers=1),
+        scheduler=SchedulerConfig(scheduler_type=scheduler_type, num_timesteps=10),
+    )
+    with caplog.at_level(logging.WARNING, logger="datadiffusion"):
+        create_model_and_scheduler(config, input_size=4)
+    assert any("mismatch" in r.getMessage() for r in caplog.records) == warns

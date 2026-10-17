@@ -44,3 +44,22 @@ def test_self_improvement_two_iterations():
     loop = SelfImprovementLoop(config)
     result = loop.run()
     assert len(result.iterations) == 2
+
+
+def test_adjust_config_keeps_hidden_size_divisible_by_num_heads():
+    """Repeated capacity bumps must keep hidden_size valid for multi-head attention (G-008)."""
+    from datadiffusion.evaluation.composite import QualityMetrics
+
+    config = ExperimentConfig(
+        model=ModelConfig(model_type="transformer", hidden_size=256, num_heads=4),
+        self_improvement=SelfImprovementConfig(enabled=True, capacity_increase_factor=1.5),
+    )
+    loop = SelfImprovementLoop(config)
+    bad = QualityMetrics(
+        feature_reports=[], avg_ks_statistic=0.5, corr_diff_norm=1.0,
+        ml_utility_ratio=0.1, r2_real=0.5, r2_synthetic=0.0, composite_score=0.1,
+    )
+    for _ in range(4):
+        loop._adjust_config(bad)
+        assert config.model.hidden_size % config.model.num_heads == 0
+        assert config.model.hidden_size % 2 == 0

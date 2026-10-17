@@ -68,3 +68,35 @@ def test_uniform_sampling_without_importance():
     samples = trainer._sample_timesteps(10000, 1000, torch.device("cpu"))
     median = samples.float().median().item()
     assert 400 < median < 600, f"Median {median} should be near 500 for uniform sampling"
+
+
+def test_score_model_with_standard_scheduler_no_crash(dummy_8d_data, small_score_config):
+    """--model_type score with the default --scheduler_type standard used to raise
+    AttributeError (sqrt_1m_alphas_cumprod only exists on ScoreBasedNoiseScheduler)."""
+    small_score_config.scheduler.scheduler_type = "standard"
+    model, scheduler = create_model_and_scheduler(small_score_config, input_size=8)
+    trainer = Trainer(small_score_config)
+    train_losses, _ = trainer.train(model, scheduler, dummy_8d_data)
+    assert len(train_losses) > 0
+
+
+def test_lr_schedule_spans_all_optimizer_steps(monkeypatch, dummy_8d_data, small_mlp_config):
+    """With gradient accumulation the optimizer steps once per window, so OneCycleLR must be
+    sized in optimizer steps, not batches; otherwise the LR never peaks or anneals (G-011)."""
+    import datadiffusion.training.trainer as trainer_mod
+
+    created = []
+
+    class RecordingOneCycleLR(trainer_mod.OneCycleLR):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            created.append(self)
+
+    monkeypatch.setattr(trainer_mod, "OneCycleLR", RecordingOneCycleLR)
+    small_mlp_config.training.accumulation_steps = 4
+    small_mlp_config.training.early_stopping_patience = 100
+    model, scheduler = create_model_and_scheduler(small_mlp_config, input_size=8)
+    Trainer(small_mlp_config).train(model, scheduler, dummy_8d_data)
+
+    sched = created[0]
+    assert sched.last_epoch == sched.total_steps

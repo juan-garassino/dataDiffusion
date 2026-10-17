@@ -46,6 +46,10 @@ def generate_samples_ddim(
 
     # Build a sub-sequence of timesteps evenly spaced over [0, T)
     total_timesteps = scheduler.num_timesteps
+    if not 1 <= num_inference_steps <= total_timesteps:
+        raise ValueError(
+            f"num_inference_steps must be in [1, {total_timesteps}], got {num_inference_steps}"
+        )
     step_ratio = total_timesteps // num_inference_steps
     timesteps = (np.arange(0, num_inference_steps) * step_ratio).astype(np.int64)
     timesteps = np.flip(timesteps).copy()  # reverse: high → low

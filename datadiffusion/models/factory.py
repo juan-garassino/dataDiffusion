@@ -5,6 +5,9 @@ from ..schedulers import NoiseScheduler, ScoreBasedNoiseScheduler
 from .mlp import TabularMLP
 from .transformer import TabularTransformer
 from .score import EnhancedScoreNetwork
+from ..tracking.logger import get_logger
+
+logger = get_logger("datadiffusion.models")
 
 
 def create_model_and_scheduler(config: ExperimentConfig, input_size: int):
@@ -59,5 +62,14 @@ def create_model_and_scheduler(config: ExperimentConfig, input_size: int):
         )
     else:
         raise ValueError(f"Unknown scheduler type: {sc.scheduler_type}")
+
+    # Score models predict a score; mlp/transformer predict noise. The scheduler's
+    # reverse step interprets the model output, so the two must agree.
+    if (mc.model_type == "score") != (sc.scheduler_type == "score"):
+        logger.warning(
+            "model/scheduler mismatch: model_type=%r with scheduler_type=%r; sampling will "
+            "misinterpret the model output (use scheduler_type='score' only with model_type='score')",
+            mc.model_type, sc.scheduler_type,
+        )
 
     return model, scheduler
