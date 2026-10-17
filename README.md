@@ -118,8 +118,8 @@ python main.py --self_improve --max_iterations 5 --quality_threshold 0.90
 # Use standard scaler instead of quantile
 python main.py --scaler_type standard
 
-# Transformer architecture with score-based scheduler
-python main.py --model_type transformer --scheduler_type score
+# Score network with its matching score-based (SDE) scheduler
+python main.py --model_type score --scheduler_type score
 
 # YAML config
 python main.py --config experiments/my_config.yaml
